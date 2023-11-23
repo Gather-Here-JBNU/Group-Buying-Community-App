@@ -13,6 +13,3 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-class chatting {
-
-}
