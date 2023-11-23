@@ -80,7 +80,7 @@
             android:background="@drawable/textview_rounded"
             android:ems="10"
             android:gravity="center_vertical"
-            android:hint="비밀번호를 설정해주세요."
+            android:hint="비밀번호를 입력해주세요."
             android:inputType="textPersonName"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
