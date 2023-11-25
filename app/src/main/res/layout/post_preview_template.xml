@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp">
+    android:layout_height="120dp"
+    android:background="@drawable/post_preview_template_shape">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/postTextLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/postTextLayout"
-        app:layout_constraintHorizontal_weight="1"/>
+        app:layout_constraintHorizontal_weight="1"
+        />
 
     <LinearLayout
         android:id="@+id/postTextLayout"
@@ -31,17 +33,27 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
             android:layout_weight="1"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="3dp"/>
+            android:background="#EEEEEE"
+            android:gravity="center_vertical|start"
+            android:layout_marginRight="5dp"
+            android:text="제목"
+            />
 
         <TextView
             android:id="@+id/summary"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="6dp"/>
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="2"
+            android:background="#EEEEEE"
+            android:gravity="center_vertical|start"
+            android:layout_marginRight="5dp"
+            android:text="내용 1줄 요약"
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

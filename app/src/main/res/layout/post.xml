@@ -3,4 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#93BFCF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Spinner
+            android:id="@+id/categorySelectBar"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/category_select_bar_shape"
+            android:layout_marginTop="1dp"
+            />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/postSearchBar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/post_search_bar_shape"
+            android:layout_marginTop="1dp"
+            app:queryHint="@string/search_hint"
+            app:iconifiedByDefault="false"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEE9DA"
+            android:layout_marginTop="1dp"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
