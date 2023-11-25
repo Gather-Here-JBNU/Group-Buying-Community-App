@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CloudComputingProject</string>
     <string name="search_hint">검색어 입력</string>
+    <string name="favorite_button_description">찜 버튼</string>
 </resources>
