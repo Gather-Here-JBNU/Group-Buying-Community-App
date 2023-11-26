@@ -1,6 +1,8 @@
 package com.example.cloudcomputingproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -64,11 +66,35 @@ public class PostActivity extends AppCompatActivity {
         // 임시 데이터 생성
         postPreviews = new ArrayList<>();
         // 여기에 임의의 데이터 추가...
-        postPreviews.add(new PostPreview("http://www.bhc.co.kr/upload/bhc/menu/%EB%BF%8C%EB%A7%81%ED%81%B4_233x160.png",
-                "치킨 시켜 먹을사람", "참빛관 사는데 치킨 시켜먹을사람?"));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "치킨 시켜 먹을사람 2명 구함", "참빛관 사는데 치킨 시켜먹을사람?"));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "피자 먹고싶은데 같이 배달시킬사람?", "사대부고 사는데 피자 배달비 반띵 할사람?"));
 
         // 어댑터 생성 및 설정
         adapter = new PostAdapter(postPreviews);
         recyclerView.setAdapter(adapter);
+
+        // CustomItemDecoration을 추가합니다.
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_decoration_margin);
+        recyclerView.addItemDecoration(new PostActivity.CustomItemDecoration(spacingInPixels));
+    }
+
+    // CustomItemDecoration 클래스, 리사이클러뷰의 세부조정사항을 설정합니다.
+    class CustomItemDecoration extends RecyclerView.ItemDecoration {
+        private final int verticalSpaceHeight;
+
+        public CustomItemDecoration(int verticalSpaceHeight) {
+            this.verticalSpaceHeight = verticalSpaceHeight;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            outRect.bottom = verticalSpaceHeight;
+            // 첫 번째 아이템에는 상단에도 공간을 추가합니다.
+            if (parent.getChildAdapterPosition(view) == 0) {
+                outRect.top = verticalSpaceHeight;
+            }
+        }
     }
 }
