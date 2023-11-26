@@ -46,7 +46,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         public PostViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.postTemplateImageView);
             titleView = itemView.findViewById(R.id.postTitle);
             summaryView = itemView.findViewById(R.id.postSummary);
         }
