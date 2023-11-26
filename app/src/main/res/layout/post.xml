@@ -18,7 +18,7 @@
         <Spinner
             android:id="@+id/categorySelectBar"
             android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/category_select_bar_shape"
             android:layout_marginTop="1dp"
@@ -39,6 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#EEE9DA"
-            android:layout_marginTop="1dp"/>
+            android:layout_marginTop="2dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
