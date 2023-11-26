@@ -17,7 +17,7 @@ public class CategoryActivity extends AppCompatActivity {
     private List<CategoryItem> categoryList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { //여기에서 db의 카테고리 종류를 가져와서 생성하면 됩니다.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category);
 
@@ -38,7 +38,7 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new CustomItemDecoration(spacingInPixels));
     }
 
-    // CustomItemDecoration 클래스를 내부 클래스로 정의합니다.
+    // CustomItemDecoration 클래스, 리사이클러뷰의 세부조정사항을 설정합니다.
     class CustomItemDecoration extends RecyclerView.ItemDecoration {
         private final int verticalSpaceHeight;
 

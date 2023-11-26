@@ -24,7 +24,10 @@
         <activity
             android:name=".CategoryActivity"
             android:exported="true">
-            <!-- 인텐트 필터는 여기서 필요하지 않습니다. -->
+        </activity>
+        <activity
+            android:name=".PostActivity"
+            android:exported="true">
         </activity>
     </application>
 
