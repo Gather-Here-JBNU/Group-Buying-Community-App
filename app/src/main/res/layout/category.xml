@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/category_title"
+            android:id="@+id/categoryTitle"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
@@ -30,7 +30,7 @@
             android:background="@drawable/category_title_shape"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/category_view"
+            android:id="@+id/categoryView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp"

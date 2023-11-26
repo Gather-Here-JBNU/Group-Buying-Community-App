@@ -21,7 +21,7 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category);
 
-        recyclerView = findViewById(R.id.category_view);
+        recyclerView = findViewById(R.id.categoryView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         categoryList = new ArrayList<>();

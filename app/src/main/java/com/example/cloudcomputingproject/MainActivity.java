@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main);
         //setContentView(R.layout.post_preview_template);
 
-        // CategoryActivity를 시작하는 Intent를 생성합니다.
+        // CategoryActivity or PostActivity를 시작하는 Intent를 생성합니다.
         Intent intent = new Intent(this, PostActivity.class);
         startActivity(intent);
 
