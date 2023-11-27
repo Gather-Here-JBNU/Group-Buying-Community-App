@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.CloudComputingProject" parent="Base.Theme.CloudComputingProject" />
+    <style name="ToolbarTitleText" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
