@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +104,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 게시글 작성 페이지로 넘어가는 Intent 생성
-                //Intent intent = new Intent(PostActivity.this, PostingActivity.class);
+                //Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
                 //startActivity(intent);
             }
         });
