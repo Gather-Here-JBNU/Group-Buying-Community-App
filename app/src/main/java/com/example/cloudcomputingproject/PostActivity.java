@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.cloudcomputingproject.postpage.PostAdapter;
 import com.example.cloudcomputingproject.postpage.PostPreview;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class PostActivity extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class PostActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PostAdapter adapter;
     private List<PostPreview> postPreviews;
+    private FloatingActionButton postingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,22 @@ public class PostActivity extends AppCompatActivity {
                 "치킨 시켜 먹을사람 2명 구함", "참빛관 사는데 치킨 시켜먹을사람?"));
         postPreviews.add(new PostPreview("이미지 url 넣는곳",
                 "피자 먹고싶은데 같이 배달시킬사람?", "사대부고 사는데 피자 배달비 반띵 할사람?"));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("이미지 url 넣는곳",
+                "예시입니다.", "리사이클러뷰 확인용."));
 
         // 어댑터 생성 및 설정
         adapter = new PostAdapter(postPreviews);
@@ -78,6 +96,17 @@ public class PostActivity extends AppCompatActivity {
         // CustomItemDecoration을 추가합니다.
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_decoration_margin);
         recyclerView.addItemDecoration(new PostActivity.CustomItemDecoration(spacingInPixels));
+
+        // FloatingActionButton 초기화
+        postingButton = findViewById(R.id.postingButton);
+        postingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 게시글 작성 페이지로 넘어가는 Intent 생성
+                //Intent intent = new Intent(PostActivity.this, PostingActivity.class);
+                //startActivity(intent);
+            }
+        });
     }
 
     // CustomItemDecoration 클래스, 리사이클러뷰의 세부조정사항을 설정합니다.

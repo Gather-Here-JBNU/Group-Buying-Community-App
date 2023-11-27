@@ -5,4 +5,5 @@
     <string name="category_title">Category</string>
     <string name="for_category_add">추가할 카테고리 이름을 입력해주세요</string>
     <string name="add">Add</string>
+    <string name="postingButton_description">새 게시물 추가</string>
 </resources>
