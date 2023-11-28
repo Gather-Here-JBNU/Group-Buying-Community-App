@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CloudComputingProject"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginLogoutSelectActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:parentActivityName=".LoginLogoutSelectActivity" />
+        <activity
+            android:name=".LoginActivty"
+            android:exported="false"
+            android:parentActivityName=".LoginLogoutSelectActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".Mypage"
+            android:exported="false" />
+        <activity
+            android:name=".MyFavoritesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileChange"
+            android:exported="false" />
+        <activity
+            android:name=".ViewCommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPostActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
