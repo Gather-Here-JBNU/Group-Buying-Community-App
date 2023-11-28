@@ -18,7 +18,10 @@
             android:name=".ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".showpost_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".addpost_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
