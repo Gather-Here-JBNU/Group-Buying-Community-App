@@ -13,7 +13,10 @@
         android:theme="@style/Theme.CloudComputingProject"
         tools:targetApi="31">
         <activity
-            android:name=".LoginLogoutSelectActivity"
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +25,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LoginLogoutSelectActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false"
             android:parentActivityName=".LoginLogoutSelectActivity" />
@@ -29,9 +35,6 @@
             android:name=".LoginActivty"
             android:exported="false"
             android:parentActivityName=".LoginLogoutSelectActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
         <activity
             android:name=".Mypage"
             android:exported="false" />
