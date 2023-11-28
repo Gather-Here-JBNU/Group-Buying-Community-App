@@ -104,8 +104,8 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 게시글 작성 페이지로 넘어가는 Intent 생성
-                //Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#93BFCF">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:id="@+id/postView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#EEE9DA"
+            android:background="#FFFFFF"
             android:layout_marginTop="2dp"/>
 
     </LinearLayout>
