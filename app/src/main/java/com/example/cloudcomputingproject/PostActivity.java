@@ -63,8 +63,8 @@ public class PostActivity extends AppCompatActivity {
                     Intent intent = new Intent(PostActivity.this, ChatActivity.class);
                     startActivity(intent);
                 } else if(item.equals("게시글 확인용")) { // 게시글 확인용. 누를시 게시글 액티비티 이동.
-                    //Intent intent = new Intent(PostActivity.this, .class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(PostActivity.this, ShowPostClickActivity.class);
+                    startActivity(intent);
                 }
                 // 선택된 아이템을 사용한 추가 동작 구현
             }
