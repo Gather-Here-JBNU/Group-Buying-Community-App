@@ -12,12 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CloudComputingProject"
         tools:targetApi="31">
-
+        <activity
+            android:name=".addpost_Activity"
+            android:exported="false" />
         <activity
             android:name=".showpost_Activity"
             android:exported="false" />
         <activity
-            android:name=".addpost_Activity"
+            android:name=".showpost_click_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
