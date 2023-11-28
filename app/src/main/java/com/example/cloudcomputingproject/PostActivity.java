@@ -40,7 +40,9 @@ public class PostActivity extends AppCompatActivity {
         categories.add("운동 기구");
         categories.add("도서");
         categories.add("배달 음식");
-
+        categories.add("채팅 확인용");
+        categories.add("게시글 확인용");
+        categories.add("----카테고리 추가하기----");
 
         // 어댑터 생성 및 설정
         ArrayAdapter<String> postpageCategorySpinnerAdapter = new ArrayAdapter<>(this, R.layout.postpage_category_spinner_item, categories); // 스피너를 클릭하지 않았을 때의 기본 레이아웃
@@ -53,6 +55,17 @@ public class PostActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 아이템 선택시 동작
                 String item = parent.getItemAtPosition(position).toString();
+                
+                if(item.equals("----카테고리 추가하기----")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
+                    Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
+                    startActivity(intent);
+                } else if(item.equals("채팅 확인용")) { // 채팅 확인용. 누를시 채팅 액티비티 이동.
+                    Intent intent = new Intent(PostActivity.this, ChatActivity.class);
+                    startActivity(intent);
+                } else if(item.equals("게시글 확인용")) { // 게시글 확인용. 누를시 게시글 액티비티 이동.
+                    //Intent intent = new Intent(PostActivity.this, .class);
+                    //startActivity(intent);
+                }
                 // 선택된 아이템을 사용한 추가 동작 구현
             }
 
@@ -104,7 +117,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 게시글 작성 페이지로 넘어가는 Intent 생성
-                Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
+                Intent intent = new Intent(PostActivity.this, AddPostActivity.class);
                 startActivity(intent);
             }
         });
@@ -127,4 +140,5 @@ public class PostActivity extends AppCompatActivity {
             }
         }
     }
+
 }

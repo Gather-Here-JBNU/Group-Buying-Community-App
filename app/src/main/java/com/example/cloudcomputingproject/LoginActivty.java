@@ -28,7 +28,7 @@ public class LoginActivty extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivty.this, Mypage.class);
+                Intent intent = new Intent(LoginActivty.this, PostActivity.class);
                 startActivity(intent);
                 //Toast.makeText(LoginActivty.this, "click", Toast.LENGTH_SHORT).show(); // 로그인 버튼 눌렀을 때 동작. 잠시 toast로 대체
             }
