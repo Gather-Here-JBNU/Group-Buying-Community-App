@@ -50,11 +50,12 @@
             android:exported="false"
             android:parentActivityName=".LoginLogoutSelectActivity" />
         <activity
-            android:name=".LoginActivty"
+            android:name=".LoginActivity"
             android:exported="false"
             android:parentActivityName=".LoginLogoutSelectActivity" />
         <activity
             android:name=".Mypage"
+            android:parentActivityName=".PostActivity"
             android:exported="false" />
         <activity
             android:name=".MyFavoritesActivity"

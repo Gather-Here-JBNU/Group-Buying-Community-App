@@ -42,6 +42,7 @@ public class PostActivity extends AppCompatActivity {
         categories.add("배달 음식");
         categories.add("채팅 확인용");
         categories.add("게시글 확인용");
+        categories.add("마이페이지 확인용");
         categories.add("----카테고리 추가하기----");
 
         // 어댑터 생성 및 설정
@@ -64,6 +65,9 @@ public class PostActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if(item.equals("게시글 확인용")) { // 게시글 확인용. 누를시 게시글 액티비티 이동.
                     Intent intent = new Intent(PostActivity.this, ShowPostClickActivity.class);
+                    startActivity(intent);
+                } else if(item.equals("마이페이지 확인용")){
+                    Intent intent = new Intent(PostActivity.this, Mypage.class);
                     startActivity(intent);
                 }
                 // 선택된 아이템을 사용한 추가 동작 구현

@@ -19,7 +19,7 @@ public class LoginLogoutSelectActivity extends AppCompatActivity {
 
         login_btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), LoginActivty.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });

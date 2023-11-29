@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Mypage extends AppCompatActivity {
 
     ProgressBar progressBar;
@@ -70,7 +72,13 @@ public class Mypage extends AppCompatActivity {
         logout_tr.setOnClickListener(new View.OnClickListener() { // 로그아웃 클릭시,
             @Override
             public void onClick(View v) {
-                Toast.makeText(Mypage.this, "click", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                finish();
+
+                //Intent를 새로 만든 후 LoginActivity로 화면전환
+                Intent intent = new Intent(Mypage.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }

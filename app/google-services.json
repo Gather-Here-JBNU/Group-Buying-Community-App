@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "170876007192",
+    "project_id": "cloudcomputingproject-2019b",
+    "storage_bucket": "cloudcomputingproject-2019b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170876007192:android:206f1fb409f367e5f1a46d",
+        "android_client_info": {
+          "package_name": "com.example.cloudcomputingproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC12BimzYSrN6kjxU5StERDXCRUzAbMzNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
