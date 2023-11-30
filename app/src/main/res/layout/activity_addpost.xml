@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPostActivity"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <!--
+            뒤로가기 버튼
+            -->
+            <android.widget.Button
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:background="@drawable/arrow_left"
+                android:id="@+id/back_btn"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <android.widget.Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저장"
+                android:textColor="@color/black"
+                android:background="@color/colorFocus"
+                android:id="@+id/saveBtn"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:alpha="0.3"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="13dp"/>
+
+        <!--
+        이미지 선택
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이미지 선택"
+                android:textSize="13sp"
+                android:alpha="0.5"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/border_radius">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/image_regular"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"/>
+        </LinearLayout>
+
+        <!--
+        게시글 작성
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제목"
+                android:textSize="13sp"
+                android:alpha="0.5"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_style"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="글 작성"
+                android:textSize="13sp"
+                android:alpha="0.5"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_style"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:maxLines="10"
+                android:scrollbars="vertical"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
