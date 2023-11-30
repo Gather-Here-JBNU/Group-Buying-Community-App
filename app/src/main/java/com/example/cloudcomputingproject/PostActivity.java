@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,14 +27,19 @@ public class PostActivity extends AppCompatActivity {
     private PostAdapter adapter;
     private List<PostPreview> postPreviews;
     private FloatingActionButton postingButton;
+    String u_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post); // 여러분의 레이아웃 파일 이름으로 변경하세요.
+        Intent intent = getIntent();
+        u_id = intent.getStringExtra("u_id"); // 로그인할때 전달해준 u_id를 변수에 저장.
 
         // 스피너 초기화
         Spinner spinner = findViewById(R.id.categorySelectBar); // XML 파일에 정의된 스피너 ID
+
+
 
         // 스피너에 들어갈 데이터 리스트 생성 (db의 카테고리 리스트에서 받아온 키로 생성할 예정)
         List<String> categories = new ArrayList<>();

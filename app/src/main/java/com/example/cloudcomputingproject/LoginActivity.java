@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +60,11 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {//성공했을때
                                     Intent intent = new Intent(LoginActivity.this, PostActivity.class);
+                                    FirebaseUser cur_user = mAuth.getCurrentUser();
+                                    String u_id = cur_user.getUid();
+                                    Log.e("LoginActivity에서 u_id는 ", u_id);
+                                    intent.putExtra("u_id", u_id); // 파이어베이스 아이디를 intent에 전송. 이를 통해 aws db에 접근할 것임.
+
                                     startActivity(intent);
                                 } else {//실패했을때
                                     Toast.makeText(LoginActivity.this, "로그인 오류", Toast.LENGTH_SHORT).show();
@@ -66,10 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
                 save();
-                //Intent intent = new Intent(LoginActivity.this, PostActivity.class);
-                // startActivity(intent);
-                //Toast.makeText(LoginActivty.this, "click", Toast.LENGTH_SHORT).show(); // 로그인 버튼 눌렀을 때 동작. 잠시 toast로 대체
-
             }
         });
 
