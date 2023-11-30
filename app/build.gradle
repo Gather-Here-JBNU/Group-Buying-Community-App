@@ -41,4 +41,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0' // 원형 프로필
     implementation 'com.squareup.picasso:picasso:2.71828' // Picasso 라이브러리
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0' // node.js와 통신하기 위한 retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.2' // node.js와 통신하기 위한 retrofit
+    implementation 'com.google.code.gson:gson:2.8.2' // json을 편하게 쓰기 위한 gson
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0' // json을 편하게 쓰기 위한 gson
 }
