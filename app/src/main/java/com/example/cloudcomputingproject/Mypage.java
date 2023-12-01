@@ -83,16 +83,16 @@ public class Mypage extends AppCompatActivity {
         });
     }
     private void animateProgressBar(int targetProgress) {
-        ValueAnimator animator = ValueAnimator.ofInt(0, targetProgress);
-        animator.setDuration(500); // 애니메이션 기간 (1초로 설정, 필요에 따라 조절)
+            ValueAnimator animator = ValueAnimator.ofInt(0, targetProgress);
+            animator.setDuration(500); // 애니메이션 기간 (1초로 설정, 필요에 따라 조절)
 
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int progress = (int) animation.getAnimatedValue();
-                progressBar.setProgress(progress);
-            }
-        });
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    int progress = (int) animation.getAnimatedValue();
+                    progressBar.setProgress(progress);
+                }
+            });
 
         animator.start();
     }
