@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         //현재 유저의 Uid를 이름으로 한 document 생성. 이게 없으면 사용자 컨텐츠의 이륾과 사용자id이름이 달라 사용하기 힘듬
                                         mStore.collection(FirebaseID.user).document(user.getUid()).set(userMap, SetOptions.merge());
 
-                                        // 파이어베이스 계정 생성 후, 서버 데이터베이스에 삽입
+                                        // 파이어베이스 계정 생성 후, 서버 RDS 데이터베이스에 삽입
                                         startInsert(new UserDataInsert(u_id, email, pw, nickname));
 
                                        //Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

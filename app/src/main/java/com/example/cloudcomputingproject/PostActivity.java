@@ -27,7 +27,7 @@ public class PostActivity extends AppCompatActivity {
     private PostAdapter adapter;
     private List<PostPreview> postPreviews;
     private FloatingActionButton postingButton;
-    String u_id;
+    String u_id, category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class PostActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 아이템 선택시 동작
                 String item = parent.getItemAtPosition(position).toString();
-                
+                category = item;
                 if(item.equals("----카테고리 추가하기----")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
                     Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
                     startActivity(intent);
@@ -128,6 +128,8 @@ public class PostActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // 게시글 작성 페이지로 넘어가는 Intent 생성
                 Intent intent = new Intent(PostActivity.this, AddPostActivity.class);
+                intent.putExtra("u_id", u_id);
+                intent.putExtra("category", category);
                 startActivity(intent);
             }
         });
