@@ -42,6 +42,7 @@ public class PostActivity extends AppCompatActivity {
 
     private APIInterface service;
     List<String> category_label;
+    List<String> categories = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,20 +53,12 @@ public class PostActivity extends AppCompatActivity {
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
 
-        startGet();
-
+        startGetCategory();
+        // startGet에서 카테고리를 받아오고, categories.add를 수행
         // 스피너 초기화
         Spinner spinner = findViewById(R.id.categorySelectBar); // XML 파일에 정의된 스피너 ID
 
         // 스피너에 들어갈 데이터 리스트 생성 (db의 카테고리 리스트에서 받아온 키로 생성할 예정)
-        List<String> categories = new ArrayList<>();
-        categories.add("운동 기구");
-        categories.add("도서");
-        categories.add("배달 음식");
-        categories.add("채팅 확인용");
-        categories.add("게시글 확인용");
-        categories.add("마이페이지 확인용");
-        categories.add("----카테고리 추가하기----");
 
         // 어댑터 생성 및 설정
         ArrayAdapter<String> postpageCategorySpinnerAdapter = new ArrayAdapter<>(this, R.layout.postpage_category_spinner_item, categories); // 스피너를 클릭하지 않았을 때의 기본 레이아웃
@@ -169,7 +162,7 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
-    private void startGet(){
+    private void startGetCategory(){
         service.CategoryGet().enqueue(new Callback<CategoryDataResponse>() {
             @Override
             public void onResponse(Call<CategoryDataResponse> call, Response<CategoryDataResponse> response) {
@@ -182,7 +175,14 @@ public class PostActivity extends AppCompatActivity {
 
                     for(String category : category_label){
                         Log.d("Category : ", category);
+                            categories.add(category);
                     }
+
+                    categories.add("채팅 확인용");
+                    categories.add("게시글 확인용");
+                    categories.add("마이페이지 확인용");
+                    categories.add("----카테고리 추가하기----");
+
                     //finish();
                 }
             }
