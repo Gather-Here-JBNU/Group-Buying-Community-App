@@ -39,7 +39,7 @@
 
                 <android.widget.Button
                     android:layout_width="80dp"
-                    android:layout_height="30dp"
+                    android:layout_height="48dp"
                     android:text="연락하기"
                     android:background="@color/colorFocus"
                     android:textColor="@color/black"
