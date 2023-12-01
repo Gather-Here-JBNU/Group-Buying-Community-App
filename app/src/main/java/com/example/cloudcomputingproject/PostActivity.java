@@ -10,15 +10,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cloudcomputingproject.datas.CategoryDataResponse;
+import com.example.cloudcomputingproject.datas.UserDataInsert;
+import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 import com.example.cloudcomputingproject.postpage.PostAdapter;
 import com.example.cloudcomputingproject.postpage.PostPreview;
+import com.example.cloudcomputingproject.utility.APIInterface;
+import com.example.cloudcomputingproject.utility.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class PostActivity extends AppCompatActivity {
@@ -29,6 +40,9 @@ public class PostActivity extends AppCompatActivity {
     private FloatingActionButton postingButton;
     String u_id, category;
 
+    private APIInterface service;
+    List<String> category_label;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +50,12 @@ public class PostActivity extends AppCompatActivity {
         Intent intent = getIntent();
         u_id = intent.getStringExtra("u_id"); // 로그인할때 전달해준 u_id를 변수에 저장.
 
+        service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
+
+        startGet();
+
         // 스피너 초기화
         Spinner spinner = findViewById(R.id.categorySelectBar); // XML 파일에 정의된 스피너 ID
-
-
 
         // 스피너에 들어갈 데이터 리스트 생성 (db의 카테고리 리스트에서 받아온 키로 생성할 예정)
         List<String> categories = new ArrayList<>();
@@ -153,4 +169,30 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
+    private void startGet(){
+        service.CategoryGet().enqueue(new Callback<CategoryDataResponse>() {
+            @Override
+            public void onResponse(Call<CategoryDataResponse> call, Response<CategoryDataResponse> response) {
+                CategoryDataResponse result = response.body();
+                Log.d("카테고리 Respnose 안입니다.", ".");
+                if (result.getCode() == 200) {
+                    Log.e("카테고리 정보 불러오기 성공.", String.valueOf("."));
+
+                    category_label = result.getCategoryLabel();
+
+                    for(String category : category_label){
+                        Log.d("Category : ", category);
+                    }
+                    //finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryDataResponse> call, Throwable t) {
+                Toast.makeText(PostActivity.this, "카테고리 정보 불러오기 실패", Toast.LENGTH_SHORT).show();
+                Log.e("카테고리 정보 불러오기 실패.", t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
 }

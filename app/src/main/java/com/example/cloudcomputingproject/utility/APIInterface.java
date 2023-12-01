@@ -1,5 +1,6 @@
 package com.example.cloudcomputingproject.utility;
 
+import com.example.cloudcomputingproject.datas.CategoryDataResponse;
 import com.example.cloudcomputingproject.datas.PutPostData;
 import com.example.cloudcomputingproject.datas.PutPostDataResponse;
 import com.example.cloudcomputingproject.datas.UserDataInsert;
@@ -16,4 +17,7 @@ public interface APIInterface {
 
     @POST("/post/add")
     Call<PutPostDataResponse> PostInsert(@Body PutPostData data);
+
+    @POST("/category/get")
+    Call<CategoryDataResponse> CategoryGet();
 }
