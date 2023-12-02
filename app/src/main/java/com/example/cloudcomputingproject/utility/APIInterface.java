@@ -3,6 +3,8 @@ package com.example.cloudcomputingproject.utility;
 import com.example.cloudcomputingproject.datas.CategoryDataResponse;
 import com.example.cloudcomputingproject.datas.PostDataPut;
 import com.example.cloudcomputingproject.datas.PostDataPutResponse;
+import com.example.cloudcomputingproject.datas.UserDataGet;
+import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.datas.UserDataInsert;
 import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 
@@ -19,4 +21,7 @@ public interface APIInterface {
 
     @POST("/category/get")
     Call<CategoryDataResponse> CategoryGet();
+
+    @POST("/user/get")
+    Call<UserDataGetResponse> UserGet(@Body UserDataGet data);
 }
