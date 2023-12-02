@@ -7,4 +7,7 @@
     <string name="add">Add</string>
     <string name="postingButton_description">새 게시물 추가</string>
     <string name="connect_chat">연락하기</string>
+    <string name="postTitle">제목</string>
+    <string name="postSummary">내용</string>
+    <string name="userName">사용자이름</string>
 </resources>

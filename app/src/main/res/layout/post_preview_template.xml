@@ -35,7 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:text="@string/userName"/>
             </LinearLayout>
 
             <android.widget.Button
@@ -76,13 +77,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:text="@string/postTitle"/>
 
             <TextView
                 android:id="@+id/postSummary"
                 android:layout_width="wrap_content"
                 android:layout_height="65dp"
                 android:textSize="14sp"
+                android:text="@string/postSummary"
                 />
         </LinearLayout>
     </LinearLayout>
