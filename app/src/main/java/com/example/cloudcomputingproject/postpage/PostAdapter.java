@@ -28,8 +28,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         PostPreview post = postList.get(position);
-        // 이미지 로딩 라이브러리를 사용하여 이미지 뷰에 이미지 로딩
-        Picasso.get().load(post.getImageUrl()).into(holder.imageView);
+        // 게시물 이미지 로딩, 실패 시 기본 이미지 표시
+        Picasso.get()
+                .load(post.getPostImageUrl())
+                .placeholder(R.drawable.default_image)
+                .error(R.drawable.default_image)
+                .into(holder.postImageView);
+        // 프로필 이미지 로딩, 실패 시 기본 이미지 표시
+        Picasso.get()
+                .load(post.getProfileImageUrl())
+                .placeholder(R.drawable.user)
+                .error(R.drawable.user)
+                .into(holder.profileImageView);
+        // 사용자 이름, 제목과 요약 설정
+        holder.userNameView.setText(post.getUserName());
         holder.titleView.setText(post.getTitle());
         holder.summaryView.setText(post.getSummary());
     }
@@ -40,15 +52,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        ImageView profileImageView;
+        TextView userNameView;
+        ImageView postImageView;
         TextView titleView;
         TextView summaryView;
 
         public PostViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.postTemplateImageView);
+            profileImageView = itemView.findViewById(R.id.userProfileImage); //
+            userNameView = itemView.findViewById(R.id.userName);
+            postImageView = itemView.findViewById(R.id.postTemplateImageView);
             titleView = itemView.findViewById(R.id.postTitle);
             summaryView = itemView.findViewById(R.id.postSummary);
         }
     }
+
 }

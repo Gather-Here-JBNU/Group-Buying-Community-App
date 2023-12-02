@@ -101,26 +101,18 @@ public class PostActivity extends AppCompatActivity {
         // 임시 데이터 생성
         postPreviews = new ArrayList<>();
         // 여기에 임의의 데이터 추가...
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "치킨 시켜 먹을사람 2명 구함", "참빛관 사는데 치킨 시켜먹을사람?"));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "피자 먹고싶은데 같이 배달시킬사람?", "사대부고 사는데 피자 배달비 반띵 할사람?"));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
-        postPreviews.add(new PostPreview("이미지 url 넣는곳",
-                "예시입니다.", "리사이클러뷰 확인용."));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
 
         // 어댑터 생성 및 설정
         adapter = new PostAdapter(postPreviews);

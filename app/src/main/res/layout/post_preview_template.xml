@@ -1,63 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginLeft="5dp"
-    android:background="@drawable/post_preview_template_shape">
-
-    <ImageView
-        android:id="@+id/postTemplateImageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@id/postTextLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        />
-
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/post_preview_template_shape"
+    android:layout_margin="2dp">
     <LinearLayout
-        android:id="@+id/postTextLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@id/postTemplateImageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="3">
+        >
 
-        <TextView
-            android:id="@+id/postTitle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
-            android:background="#F3F3F3"
-            android:gravity="center_vertical|start"
-            android:layout_marginRight="5dp"
-            android:text="제목"
-            />
+            android:layout_height="48dp"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/postSummary"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="2"
-            android:background="#F3F3F3"
-            android:gravity="center_vertical|start"
-            android:layout_marginRight="5dp"
-            android:text="내용 1줄 요약"
-            />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/userProfileImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <android.widget.Button
+                android:id="@+id/chatConnectButton"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:text="@string/connect_chat"
+                android:background="@drawable/chat_connect_button_shape"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/postTemplateImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp">
+        </ImageView>
+
+
+        <LinearLayout
+            android:id="@+id/postTextLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/postTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/postSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
