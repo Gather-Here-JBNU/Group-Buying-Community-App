@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PutPostData {
+public class PostDataPut { // 게시글 작성시, EditText에 작성한 내용을 서버로 전송할 것이다.
     @SerializedName("user_id")
     private String user_id;
 
@@ -27,7 +27,7 @@ public class PutPostData {
     @SerializedName("location")
     private String location;
 
-    public PutPostData(String user_id, String title, String contents, String img, String category_label,
+    public PostDataPut(String user_id, String title, String contents, String img, String category_label,
                        String price, String location){
         this.user_id = user_id;
         this.title = title;

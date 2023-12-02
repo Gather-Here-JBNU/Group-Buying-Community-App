@@ -2,7 +2,7 @@ package com.example.cloudcomputingproject.datas;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PutPostDataResponse {
+public class PostDataPutResponse {
 
     @SerializedName("code")
     private int code;

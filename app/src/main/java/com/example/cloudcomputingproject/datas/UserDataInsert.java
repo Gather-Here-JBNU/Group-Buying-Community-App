@@ -2,7 +2,7 @@ package com.example.cloudcomputingproject.datas;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserDataInsert {
+public class UserDataInsert { // 회원가입시 EditText에 적은 내용을, user 테이블에 insert 할 것이다.
     @SerializedName("user_id")
     private String user_id;
     @SerializedName("user_email")

@@ -9,18 +9,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.cloudcomputingproject.datas.PutPostData;
-import com.example.cloudcomputingproject.datas.PutPostDataResponse;
-import com.example.cloudcomputingproject.datas.UserDataInsert;
-import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
+import com.example.cloudcomputingproject.datas.PostDataPut;
+import com.example.cloudcomputingproject.datas.PostDataPutResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
-import com.google.firebase.firestore.auth.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,15 +67,15 @@ public class AddPostActivity extends AppCompatActivity {
 
             img = "temp";
 
-            startInsert(new PutPostData(u_id, title, contents, img, category_label, price, location));
+            startInsert(new PostDataPut(u_id, title, contents, img, category_label, price, location));
         }
         return super.onOptionsItemSelected(item);
     }
-    private void startInsert(PutPostData data) {
-        service.PostInsert(data).enqueue(new Callback<PutPostDataResponse>() {
+    private void startInsert(PostDataPut data) {
+        service.PostInsert(data).enqueue(new Callback<PostDataPutResponse>() {
             @Override
-            public void onResponse(Call<PutPostDataResponse> call, Response<PutPostDataResponse> response) {
-                PutPostDataResponse result = response.body();
+            public void onResponse(Call<PostDataPutResponse> call, Response<PostDataPutResponse> response) {
+                PostDataPutResponse result = response.body();
                 data.PutPostDataPrint();
                 Log.e("u_id : ", String.valueOf(u_id));
                 Log.e("category :", String.valueOf(category_label));
@@ -94,7 +89,7 @@ public class AddPostActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<PutPostDataResponse> call, Throwable t) {
+            public void onFailure(Call<PostDataPutResponse> call, Throwable t) {
                 Toast.makeText(AddPostActivity.this, "게시글 작성", Toast.LENGTH_SHORT).show();
                 Log.e("게시글 작성 에러 발생", t.getMessage());
                 t.printStackTrace();
