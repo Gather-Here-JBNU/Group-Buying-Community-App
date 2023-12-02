@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,11 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CloudComputingProject"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".MyPage2"
+            android:exported="false" />
         <activity
             android:name=".LoginLogoutSelectActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,17 +38,14 @@
             android:exported="false" />
         <activity
             android:name=".AddPostActivity"
-            android:parentActivityName=".PostActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:parentActivityName=".PostActivity"></activity>
         <activity
             android:name=".CategoryActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".PostActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
@@ -57,8 +56,8 @@
             android:parentActivityName=".LoginLogoutSelectActivity" />
         <activity
             android:name=".Mypage"
-            android:parentActivityName=".PostActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PostActivity" />
         <activity
             android:name=".MyFavoritesActivity"
             android:exported="false" />
