@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivprofile"
+        android:id="@+id/ivProfile"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:background="@drawable/user"
@@ -18,11 +18,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvnickname"
-        android:text="이름"
+        android:id="@+id/tvNickname"
+        android:hint="이름"
         android:textSize="10sp"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/ivprofile"
+        app:layout_constraintEnd_toStartOf="@id/ivProfile"
         app:layout_constraintBottom_toTopOf="@+id/tvChat"
 
         />
@@ -37,7 +37,7 @@
         android:paddingVertical="5dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivprofile"
+        app:layout_constraintEnd_toStartOf="@+id/ivProfile"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
