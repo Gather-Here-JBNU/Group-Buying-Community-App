@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-
     private ArrayList<Chat> mDataset;
     String stMyEmail = "";
 
@@ -19,11 +18,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
      * (custom ViewHolder)
      */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        public TextView textView;
+        public TextView nickname;
         public MyViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View
             textView = v.findViewById(R.id.tvChat);
+            nickname = v.findViewById(R.id.tvNickname);
         }
     }
 
@@ -69,6 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         holder.textView.setText(mDataset.get(position).getText());
+        holder.nickname.setText(mDataset.get(position).getNickname());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
