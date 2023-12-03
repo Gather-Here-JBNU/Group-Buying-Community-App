@@ -41,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
     APIInterface service;
     String u_id, email, nickname, info; // u_id
     Intent intent;
+    String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class ChatActivity extends AppCompatActivity {
                 Log.d(TAG, "stEmail: "+stEmail);
                 Log.d(TAG, "stText: "+stText);
                 Log.d(TAG, "stNickname: "+stNickname);
+                Log.d(TAG, "stTime: "+time);
                 chatArrayList.add(chat);
                 mAdapter.notifyDataSetChanged();
             }
@@ -140,12 +142,15 @@ public class ChatActivity extends AppCompatActivity {
             Log.d(TAG,"텍스트 입력이 되었습니다." + stText);
 
             Calendar c = Calendar.getInstance();
-            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM--dd hh:mm:ss");
+            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String datetime = dateformat.format(c.getTime());
 
-            Chat chat = new Chat(stEmail, stNickname, stText);
+            SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
+            time = timeformat.format(c.getTime());
 
-            Log.d(TAG,"email은 \"" + stEmail + "\" text는 \"" + stText + "\"입니다.");
+            Chat chat = new Chat(stEmail, stNickname, stText, time);
+
+            Log.d(TAG,"email은 \"" + stEmail + "\" text는 \"" + stText + "\" time은 \"" + time + "\" 입니다.");
 
             // Firebase Realtime Database에 데이터 전송
             DatabaseReference myRef = database.getReference("message").child(datetime);

@@ -20,11 +20,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public TextView nickname;
+        public TextView time;
         public MyViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View
             textView = v.findViewById(R.id.tvChat);
             nickname = v.findViewById(R.id.tvNickname);
+            time = v.findViewById(R.id.tvTime);
         }
     }
 
@@ -71,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // contents of the view with that element
         holder.textView.setText(mDataset.get(position).getText());
         holder.nickname.setText(mDataset.get(position).getNickname());
+        holder.time.setText(mDataset.get(position).getTime());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

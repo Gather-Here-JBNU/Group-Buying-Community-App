@@ -7,14 +7,16 @@ public class Chat {
     String email;
     String nickname;
     String text;
+    String time;
 
     public Chat(){
     }
 
-    public Chat(String email, String nickname, String text){
+    public Chat(String email, String nickname, String text, String time){
         this.email = email;
         this.nickname = nickname;
         this.text = text;
+        this.time = time;
     }
 
     public Map<String, String> toMap(){
@@ -22,6 +24,7 @@ public class Chat {
         map.put("email", email);
         map.put("nickname", nickname);
         map.put("text", text);
+        map.put("time", time);
         return map;
     }
 
@@ -47,5 +50,13 @@ public class Chat {
 
     public void setText(String text){
         this.text = text;
+    }
+
+    public String getTime(){
+        return time;
+    }
+
+    public void setTime(String time){
+        this.time = time;
     }
 }
