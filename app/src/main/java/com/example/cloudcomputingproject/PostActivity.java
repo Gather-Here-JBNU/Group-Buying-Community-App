@@ -38,7 +38,7 @@ public class PostActivity extends AppCompatActivity {
     private PostAdapter adapter;
     private List<PostPreview> postPreviews;
     private FloatingActionButton postingButton;
-    String u_id, category;
+    String u_id, email, category;
     private APIInterface service;
     List<String> category_label;
     List<String> categories = new ArrayList<>();
@@ -51,6 +51,7 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.post); // 여러분의 레이아웃 파일 이름으로 변경하세요.
         Intent intent = getIntent();
         u_id = intent.getStringExtra("u_id"); // 로그인할때 전달해준 u_id를 변수에 저장.
+        email = intent.getStringExtra("email"); // 로그인할때 전달해준 email를 변수에 저장.
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
 
@@ -163,6 +164,7 @@ public class PostActivity extends AppCompatActivity {
                             } else if(item.equals("채팅 확인용")) { // 채팅 확인용. 누를시 채팅 액티비티 이동.
                                 Intent intent = new Intent(PostActivity.this, ChatActivity.class);
                                 intent.putExtra("u_id", u_id);
+                                intent.putExtra("email", email);
                                 startActivity(intent);
                             } else if(item.equals("게시글 확인용")) { // 게시글 확인용. 누를시 게시글 액티비티 이동.
                                 Intent intent = new Intent(PostActivity.this, ShowPostClickActivity.class);

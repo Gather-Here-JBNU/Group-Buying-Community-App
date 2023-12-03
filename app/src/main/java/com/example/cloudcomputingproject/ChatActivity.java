@@ -39,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     MyAdapter mAdapter;
     FirebaseDatabase database;
     APIInterface service;
-    String u_id, email, nickname, info; // u_id
+    String u_id, email, nickname, info, emailCheck; // u_id
     Intent intent;
     String time;
 
@@ -56,6 +56,7 @@ public class ChatActivity extends AppCompatActivity {
         // Intent로부터 u_id 가져오기
         intent = getIntent();
         u_id = intent.getStringExtra("u_id"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 u_id 요소 가져오기.
+        emailCheck = intent.getStringExtra("email"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 email 요소 가져오기.
 
         // UI 구성 요소
         TextView btnFinish = findViewById(R.id.btnFinish);
@@ -70,7 +71,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MyAdapter(chatArrayList, email);
+        mAdapter = new MyAdapter(chatArrayList, emailCheck);
         recyclerView.setAdapter(mAdapter);
 
 
