@@ -16,11 +16,11 @@
         app:title="임시 타이틀(카테고리가 들어갈 곳)"
         app:titleTextAppearance="@style/ToolbarTitleText" />
 
+
     <View
         android:background="#D3D3D3"
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="2px" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,8 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:orientation="vertical">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,37 +49,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이미지 선택"
-                android:textSize="13sp"
-                android:alpha="0.5"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="13dp"/>
-
-            <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/border_radius">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/image_regular" />
-            </FrameLayout>
+                    android:id="@+id/img_iv"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="left"
+                    android:clickable="true"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:background="@drawable/ic_add_photo" />
 
-            <View
-                android:layout_marginTop="10dp"
-                android:background="#D3D3D3"
-                android:layout_width="match_parent"
-                android:layout_height="2px" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="13dp"/>
         </LinearLayout>
 
         <!--
@@ -91,15 +68,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="제목"
-                android:textSize="13sp"
-                android:alpha="0.5"/>
+
             <View
+                android:layout_marginTop="10dp"
+                android:background="#80D3D3D3"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"/>
+                android:layout_height="3px" />
             <EditText
                 android:id="@+id/title_et"
                 android:layout_width="match_parent"
@@ -109,25 +83,11 @@
                 android:gravity="center|left"
                 android:textSize="16sp"
                 android:hint="글 제목"
-                android:background="@drawable/edit_text_style"/>
+                android:background="@null"/>
             <View
+                android:background="#80D3D3D3"
                 android:layout_width="match_parent"
-                android:layout_height="13dp"/>
-            <View
-                android:background="#D3D3D3"
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_marginBottom="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="가격"
-                android:textSize="13sp"
-                android:alpha="0.5"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"/>
+                android:layout_height="3px" />
             <EditText
                 android:id="@+id/price_et"
                 android:layout_width="match_parent"
@@ -137,25 +97,12 @@
                 android:gravity="center|left"
                 android:textSize="16sp"
                 android:hint="원하는 가격대를 적어주세요."
-                android:background="@drawable/edit_text_style"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="13dp"/>
-            <View
-                android:background="#D3D3D3"
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_marginBottom="10dp"/>
+                android:background="@null"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="위치"
-                android:textSize="13sp"
-                android:alpha="0.5"/>
             <View
+                android:background="#80D3D3D3"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"/>
+                android:layout_height="3px" />
             <EditText
                 android:id="@+id/location_et"
                 android:layout_width="match_parent"
@@ -165,38 +112,32 @@
                 android:gravity="center|left"
                 android:textSize="16sp"
                 android:hint="만날 장소를 적어주세요."
-                android:background="@drawable/edit_text_style"/>
+                android:background="@null"/>
+
             <View
+                android:background="#80D3D3D3"
                 android:layout_width="match_parent"
-                android:layout_height="13dp"/>
-            <View
-                android:background="#D3D3D3"
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_marginBottom="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="본문"
-                android:textSize="13sp"
-                android:alpha="0.5"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"/>
+                android:layout_height="3px" />
+
             <EditText
                 android:id="@+id/contents_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_style"
+                android:background="@null"
                 android:inputType="textMultiLine"
                 android:scrollHorizontally="false"
                 android:padding="10dp"
                 android:minLines="7"
                 android:maxLines="30"
+                android:textSize="16sp"
                 android:gravity="top|left"
-                android:hint="본문을 입력해주세요."
+                android:hint="공동구매를 진행하면서, 다른사람들이 알았으면 하는 내용이나 정보를 적어주세요!"
+                android:lineSpacingExtra="4sp"
                 android:scrollbars="vertical"/>
-
+            <ProgressBar
+                android:id="@+id/progress_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
