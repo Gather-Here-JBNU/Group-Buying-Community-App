@@ -171,6 +171,7 @@ public class PostActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else if(item.equals("마이페이지 확인용")){
                                 Intent intent = new Intent(PostActivity.this, Mypage.class);
+                                intent.putExtra("u_id", u_id);
                                 startActivity(intent);
                             }
                             // 선택된 아이템을 사용한 추가 동작 구현

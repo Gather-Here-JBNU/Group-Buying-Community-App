@@ -6,6 +6,7 @@ public class FirebaseID {
     public static String upload = "upload";
 
     public static String title = "title";
+    public static String info = "info";
     public static String contents = "contents";
     public static String comments = "comments";
 

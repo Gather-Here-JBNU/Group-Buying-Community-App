@@ -39,9 +39,8 @@ public class ChatActivity extends AppCompatActivity {
     MyAdapter mAdapter;
     FirebaseDatabase database;
     APIInterface service;
-    String u_id, email, nickname, info, emailCheck; // u_id
+    String u_id, email, nickname, emailCheck, time; // u_id
     Intent intent;
-    String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

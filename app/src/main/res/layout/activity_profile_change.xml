@@ -55,7 +55,7 @@
         android:paddingRight="15dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
-        android:id="@+id/id_tv"
+        android:id="@+id/email_tv"
         android:layout_gravity="center_horizontal"
         android:layout_width="320dp"
         android:layout_height="49dp"
