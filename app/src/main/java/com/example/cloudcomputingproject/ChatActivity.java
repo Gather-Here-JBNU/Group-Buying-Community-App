@@ -7,20 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.cloudcomputingproject.datas.CategoryDataResponse;
 import com.example.cloudcomputingproject.datas.UserDataGet;
 import com.example.cloudcomputingproject.datas.UserDataGetResponse;
-import com.example.cloudcomputingproject.datas.UserDataInsert;
-import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
 import com.google.firebase.database.ChildEventListener;
@@ -32,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Hashtable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,52 +37,48 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     ArrayList<Chat> chatArrayList;
     MyAdapter mAdapter;
-    EditText etText;
-    ImageView ivSend;
     FirebaseDatabase database;
-
     APIInterface service;
-
-    String stEmail; //삭제
-    String u_id; // u_id
+    String u_id, email, nickname, info, emailCheck; // u_id
     Intent intent;
+    String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        // 변수 초기화
         chatArrayList = new ArrayList<>();
-
-        stEmail = getIntent().getStringExtra("email"); //삭제
-
         database = FirebaseDatabase.getInstance();
-
-        TextView btnFinish = (TextView) findViewById(R.id.btnFinish);
-        intent = getIntent();
-        u_id = intent.getStringExtra("u_id"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 u_id 요소 가져오기.
-
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
 
+        // Intent로부터 u_id 가져오기
+        intent = getIntent();
+        u_id = intent.getStringExtra("u_id"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 u_id 요소 가져오기.
+        emailCheck = intent.getStringExtra("email"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 email 요소 가져오기.
 
-        startGet(new UserDataGet(u_id)); // u_id를 넣어주고, 서버와 통신할 것임.
-        btnFinish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        // UI 구성 요소
+        TextView btnFinish = findViewById(R.id.btnFinish);
+        ImageView ivSend = findViewById(R.id.btnSend);
+        EditText etText = findViewById(R.id.etText);
 
-        ivSend = (ImageView) findViewById(R.id.btnSend);
-        etText = (EditText)findViewById(R.id.etText);
+        // u_id를 넣어주고, 서버와 통신할 것임.
+        startGet(new UserDataGet(u_id));
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        // 채팅 메시지를 위한 RecyclerView 설정
+        recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MyAdapter(chatArrayList, stEmail);
+        mAdapter = new MyAdapter(chatArrayList, emailCheck);
         recyclerView.setAdapter(mAdapter);
 
+
+        //나가기 버튼 활성화
+        btnFinish.setOnClickListener(v -> finish());
+
+        // Firebase Realtime Database의 ChildEventListener 설정
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
@@ -100,8 +89,11 @@ public class ChatActivity extends AppCompatActivity {
                 String commentKey = dataSnapshot.getKey();
                 String stEmail = chat.getEmail();
                 String stText = chat.getText();
+                String stNickname = chat.getNickname();
                 Log.d(TAG, "stEmail: "+stEmail);
                 Log.d(TAG, "stText: "+stText);
+                Log.d(TAG, "stNickname: "+stNickname);
+                Log.d(TAG, "stTime: "+time);
                 chatArrayList.add(chat);
                 mAdapter.notifyDataSetChanged();
             }
@@ -110,8 +102,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
 
-                // A comment has changed, use the key to determine if we are displaying this
-                // comment and if so displayed the changed comment.
+                // 댓글이 변경되었을 때, 해당 댓글을 표시하는지 확인
 
                 // ...
             }
@@ -119,9 +110,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
 
-                // A comment has changed, use the key to determine if we are displaying this
-                // comment and if so remove it.
-                String commentKey = dataSnapshot.getKey();
+                // 댓글이 삭제되었을 때, 해당 댓글을 표시하는지 확인
 
                 // ...
             }
@@ -130,9 +119,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
                 Log.d(TAG, "onChildMoved:" + dataSnapshot.getKey());
 
-                // A comment has changed position, use the key to determine if we are
-                // displaying this comment and if so move it.
-
+                // 댓글의 위치가 변경되었을 때, 해당 댓글을 표시하는지 확인
 
                 // ...
             }
@@ -144,37 +131,36 @@ public class ChatActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         };
+
         DatabaseReference ref = database.getReference("message");
         ref.addChildEventListener(childEventListener);
 
+        // 메시지 전송을 위한 클릭 리스너
+        ivSend.setOnClickListener(v -> {
+            String stText = etText.getText().toString();
+            String stEmail = email;
+            String stNickname = nickname;
+            Log.d(TAG,"텍스트 입력이 되었습니다." + stText);
 
-        ivSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ChatDTO chat = new ChatDTO(user_name, etText.getText().toString()); //ChatDTO를 이용하여 데이터를 묶는다.
-//                databaseReference.child("chat").child(CHAT_NAME).push().setValue(chat); //databaseReference를 이용해 데이터 푸쉬
-//                chat_edit.setText(""); //입력창 초기화
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String datetime = dateformat.format(c.getTime());
 
-                String stText = etText.getText().toString();
-                //Toast.makeText(ChatActivity.this, "MSG : "+stText, Toast.LENGTH_LONG).show();
+            SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
+            time = timeformat.format(c.getTime());
 
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM--dd hh:mm:ss");
-                String datetime = dateformat.format(c.getTime());
+            Chat chat = new Chat(stEmail, stNickname, stText, time);
 
-                DatabaseReference myRef = database.getReference("message").child(datetime);
+            Log.d(TAG,"email은 \"" + stEmail + "\" text는 \"" + stText + "\" time은 \"" + time + "\" 입니다.");
 
-                Hashtable<String, String> numbers
-                        = new Hashtable<String, String>();
-                numbers.put("email", stEmail);
-                numbers.put("text", stText);
-
-                myRef.setValue(numbers);
-                etText.getText().clear();
-            }
+            // Firebase Realtime Database에 데이터 전송
+            DatabaseReference myRef = database.getReference("message").child(datetime);
+            myRef.setValue(chat);
+            etText.getText().clear();
         });
     }
 
+    // 입력된 데이터와 u_id를 기반으로 서버와 통신하는 메서드
     private void startGet(UserDataGet data){ // 입력된 데이터, u_id를바탕으로 통신할 것임.
         service.UserGet(data).enqueue(new Callback<UserDataGetResponse>() {
             @Override
@@ -184,17 +170,16 @@ public class ChatActivity extends AppCompatActivity {
 
                 if (result.getCode() == 200) {
                     Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
-                    //
-                    //result.getEmail(); 이메일 가져오기
-                    //result.getInfo(); 자기소개 가져오기 -> 필요없으면 쓰지 않으면 됨.
-                    //result.getNickname(); 닉네임 가져오기.
+
+                    email = result.getEmail();       // 이메일 가져오기
+                    nickname = result.getNickname(); // 닉네임 가져오기.
+                    //info = result.getInfo();       // 자기소개 가져오기 -> 필요없으면 쓰지 않으면 됨.
 
                     // 데이터 가져오기 성공했을 때, 이후에 다른 작업 진행하기.
                     // 예를들어, 채팅창에 가져온 email, nickname을 통해 채팅을 띄워주고 싶다면,
                     // 하나의 함수를 만들어서,
-                    //  showText();
+                    // showText();
                     // 이런식으로 넣어주어야, 데이터를 먼저 불러오고 -> 이 데이터를 바탕으로 정보를 띄워줄 수 있음.
-                    //finish();
                 }
             }
 
