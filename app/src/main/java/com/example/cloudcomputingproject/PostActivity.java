@@ -164,7 +164,7 @@ public class PostActivity extends AppCompatActivity {
                             if(item.equals("전체 게시글")){
                                 // 전체 게시글이 선택되었을 때, 전체 post data 가져오기.
                             }
-                            else if(item.equals("----카테고리 추가하기----")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
+                            else if(item.equals("----------카테고리 추가하기 ----------")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
                                 Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
                                 startActivity(intent);
                             } else if(item.equals("채팅 확인용")) { // 채팅 확인용. 누를시 채팅 액티비티 이동.
