@@ -9,8 +9,8 @@ import com.example.cloudcomputingproject.datas.UserDataGet;
 import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.datas.UserDataInsert;
 import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
-
-import java.util.List;
+import com.example.cloudcomputingproject.datas.UserDataUpdate;
+import com.example.cloudcomputingproject.datas.UserDataUpdateResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,4 +32,7 @@ public interface APIInterface {
     @POST("/postlist/get")
     Call<MainPostDataGetResponse> PostListGet(@Body MainPostDataGet data);
 
+
+    @POST("/user/update")
+    Call<UserDataUpdateResponse> UserUpdate(@Body UserDataUpdate data);
 }
