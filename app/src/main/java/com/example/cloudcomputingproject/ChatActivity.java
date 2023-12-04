@@ -183,6 +183,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onFailure(Call<UserDataGetResponse> call, Throwable t) {
                 Toast.makeText(ChatActivity.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();

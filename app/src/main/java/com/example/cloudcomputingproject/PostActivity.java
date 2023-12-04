@@ -132,15 +132,17 @@ public class PostActivity extends AppCompatActivity {
 
                     category_label = result.getCategoryLabel();
 
+                    categories.add("전체 게시글");
+
                     for(String category : category_label){
                         Log.d("Category : ", category);
-                            categories.add(category);
+                        categories.add(category);
                     }
 
                     categories.add("채팅 확인용");
                     categories.add("게시글 확인용");
                     categories.add("마이페이지 확인용");
-                    categories.add("----카테고리 추가하기----");
+                    categories.add("----------카테고리 추가하기 ----------");
 
                     // 스피너 초기화
                     spinner = findViewById(R.id.categorySelectBar); // XML 파일에 정의된 스피너 ID
@@ -156,9 +158,13 @@ public class PostActivity extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             // 아이템 선택시 동작
+
                             String item = parent.getItemAtPosition(position).toString();
                             category = item;
-                            if(item.equals("----카테고리 추가하기----")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
+                            if(item.equals("전체 게시글")){
+                                // 전체 게시글이 선택되었을 때, 전체 post data 가져오기.
+                            }
+                            else if(item.equals("----카테고리 추가하기----")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
                                 Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
                                 startActivity(intent);
                             } else if(item.equals("채팅 확인용")) { // 채팅 확인용. 누를시 채팅 액티비티 이동.
@@ -172,6 +178,9 @@ public class PostActivity extends AppCompatActivity {
                             } else if(item.equals("마이페이지 확인용")){
                                 Intent intent = new Intent(PostActivity.this, Mypage.class);
                                 startActivity(intent);
+                            } else {
+                                // db의 카테고리를 눌렀을 때, 정보를 게시글로 불러와야 함.
+
                             }
                             // 선택된 아이템을 사용한 추가 동작 구현
                         }

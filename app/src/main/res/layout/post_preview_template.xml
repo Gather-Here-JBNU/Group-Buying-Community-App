@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_marginBottom="15dp"
     android:background="@drawable/post_preview_template_shape"
+    android:clickable="true"
     android:layout_margin="2dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,15 +38,6 @@
                     android:textStyle="bold"
                     android:layout_gravity="center"/>
             </LinearLayout>
-
-            <android.widget.Button
-                android:id="@+id/chatConnectButton"
-                android:layout_width="80dp"
-                android:layout_height="48dp"
-                android:text="@string/connect_chat"
-                android:background="@drawable/chat_connect_button_shape"
-                android:textColor="@color/black"
-                />
         </LinearLayout>
 
 
