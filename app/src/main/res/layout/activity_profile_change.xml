@@ -45,7 +45,7 @@
         android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="아이디"
+        android:text="이메일"
         android:textColor="@color/black"
         android:layout_marginLeft="20dp"
         android:textStyle="bold" />
@@ -63,7 +63,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/black"
-        android:text="root"
+        android:hint="root@mail.com"
         android:textSize="15sp"
     />
 
