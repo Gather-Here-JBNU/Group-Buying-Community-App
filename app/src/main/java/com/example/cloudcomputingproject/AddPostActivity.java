@@ -114,10 +114,6 @@ public class AddPostActivity extends AppCompatActivity {
             if(imageUri != null){
                 uploadToFirebase(imageUri);
             }
-
-            img = imageUri.toString();
-
-            startInsert(new PostDataPut(u_id, title, contents, img, category_label, price, location));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -162,8 +158,14 @@ public class AddPostActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         // 나중에 접근 가능한 uri를 db에 넣자!
-                        Log.d("이미지 파일 업로드 성공 !!", ".");
+                        Log.d("이미지 파일 업로드 성공 !!", uri.toString());
 
+                        img = uri.toString();
+                        Log.d("img 변수는" , img);
+
+                        // uri를 img에 string으로 저장
+                        startInsert(new PostDataPut(u_id, title, contents, uri.toString(), category_label, price, location));
+                        // 이후, uri를 포함하여 db에 insert
                         //프로그래스바 숨김
                         progressBar.setVisibility(View.INVISIBLE);
 

@@ -19,6 +19,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cloudcomputingproject.datas.CategoryDataResponse;
+import com.example.cloudcomputingproject.datas.MainPostDataGet;
+import com.example.cloudcomputingproject.datas.MainPostDataGetResponse;
+import com.example.cloudcomputingproject.datas.Post;
+import com.example.cloudcomputingproject.datas.UserDataGet;
+import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.datas.UserDataInsert;
 import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 import com.example.cloudcomputingproject.postpage.PostAdapter;
@@ -180,7 +185,9 @@ public class PostActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else {
                                 // db의 카테고리를 눌렀을 때, 정보를 게시글로 불러와야 함.
+                                Log.d("카테고리는", category); // 성공
 
+                                startGetPosts(new MainPostDataGet(category));
                             }
                             // 선택된 아이템을 사용한 추가 동작 구현
                         }
@@ -201,5 +208,36 @@ public class PostActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+
+
+    private void startGetPosts(MainPostDataGet data){ // 카테고리 라벨을 바탕으로 통신
+        service.PostListGet(data).enqueue(new Callback<MainPostDataGetResponse>() {
+            @Override
+            public void onResponse(Call<MainPostDataGetResponse> call, Response<MainPostDataGetResponse> response) {
+                MainPostDataGetResponse result = response.body();
+                // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 MainPostDataGetResponse.java에 명시되어 있음.
+
+                if (result.getCode() == 200) {
+                    Log.d("post 불러오기 성공", String.valueOf("1"));
+
+                    List<Post> posts = result.getPosts();
+                    for(Post post : posts){
+                        Log.d("id는", String.valueOf(post.post_id));
+                        Log.d("nickname", String.valueOf(post.nickname));
+                        Log.d("title", String.valueOf(post.title));
+                        Log.d("img", String.valueOf(post.img));
+                    }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<MainPostDataGetResponse> call, Throwable t) {
+                Toast.makeText(PostActivity.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
+                Log.e("유저 데이터 불러오기 실패", t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
     }
 }
