@@ -148,7 +148,7 @@ public class ChatActivity extends AppCompatActivity {
             Log.d(TAG,"텍스트 입력이 되었습니다." + stText);
 
             Calendar c = Calendar.getInstance();
-            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datetime = dateformat.format(c.getTime());
 
             SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
