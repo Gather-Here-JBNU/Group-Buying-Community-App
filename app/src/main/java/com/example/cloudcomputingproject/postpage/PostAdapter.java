@@ -33,6 +33,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = (int) v.getTag();
+
+                PostPreview post = postList.get(position);
+
                 //parent로부터 context가져오기
                 Context context = parent.getContext();
 
@@ -40,7 +44,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 Intent in = new Intent(context, ChatActivity.class);
                 in.putExtra("u_id", u_id);
                 in.putExtra("email", email);
-                in.putExtra("title", title);
+                in.putExtra("title", post.getTitle());
                 context.startActivity(in);
 
             }
@@ -51,6 +55,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         PostPreview post = postList.get(position);
+
+        holder.itemView.setTag(position);
         // 게시물 이미지 로딩, 실패 시 기본 이미지 표시
         Picasso.get()
                 .load(post.getPostImageUrl())
@@ -67,8 +73,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.userNameView.setText(post.getUserName());
         holder.titleView.setText(post.getTitle());
         holder.summaryView.setText(post.getSummary());
-
-        title = holder.titleView.getText().toString();
     }
 
     @Override
