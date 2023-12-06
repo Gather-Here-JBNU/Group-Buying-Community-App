@@ -1,11 +1,14 @@
 package com.example.cloudcomputingproject.postpage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.cloudcomputingproject.ChatActivity;
 import com.example.cloudcomputingproject.R;
 import com.squareup.picasso.Picasso;
 
@@ -14,14 +17,34 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private List<PostPreview> postList;
+    private String u_id, email;
+    String title;
 
-    public PostAdapter(List<PostPreview> postList) {
+    public PostAdapter(List<PostPreview> postList, String u_id, String email) {
         this.postList = postList;
+        this.u_id = u_id;
+        this.email = email;
     }
 
     @Override
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_preview_template, parent, false);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //parent로부터 context가져오기
+                Context context = parent.getContext();
+
+                //ChatActivity 이동
+                Intent in = new Intent(context, ChatActivity.class);
+                in.putExtra("u_id", u_id);
+                in.putExtra("email", email);
+                in.putExtra("title", title);
+                context.startActivity(in);
+
+            }
+        });
         return new PostViewHolder(view);
     }
 
@@ -44,6 +67,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.userNameView.setText(post.getUserName());
         holder.titleView.setText(post.getTitle());
         holder.summaryView.setText(post.getSummary());
+
+        title = holder.titleView.getText().toString();
     }
 
     @Override

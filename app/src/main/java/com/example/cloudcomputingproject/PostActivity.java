@@ -168,6 +168,7 @@ public class PostActivity extends AppCompatActivity {
                                 Intent intent = new Intent(PostActivity.this, ChatActivity.class);
                                 intent.putExtra("u_id", u_id);
                                 intent.putExtra("email", email);
+                                intent.putExtra("title", "임시");
                                 startActivity(intent);
                             } else if(item.equals("게시글 확인용")) { // 게시글 확인용. 누를시 게시글 액티비티 이동.
                                 Intent intent = new Intent(PostActivity.this, ShowPostClickActivity.class);
@@ -245,7 +246,7 @@ public class PostActivity extends AppCompatActivity {
 
 
         // 어댑터 생성 및 설정
-        adapter = new PostAdapter(postPreviews);
+        adapter = new PostAdapter(postPreviews, u_id, email);
         recyclerView.setAdapter(adapter);
 
         // CustomItemDecoration을 추가합니다.
