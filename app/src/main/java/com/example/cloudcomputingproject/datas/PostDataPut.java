@@ -37,13 +37,4 @@ public class PostDataPut { // 게시글 작성시, EditText에 작성한 내용�
         this.price = price;
         this.location = location;
     }
-    public void PutPostDataPrint(){
-        Log.d("this.user_id : ", this.user_id);
-        Log.d("this.title : ", this.title);
-        Log.d("this.contents : ", this.contents);
-        Log.d("this.img : ", this.img);
-        Log.d("this.category_label: ", this.category_label);
-        Log.d("this.price : ", this.price);
-        Log.d("this.location : ", this.location);
-    }
 }

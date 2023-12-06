@@ -124,6 +124,9 @@ public class AddPostActivity extends AppCompatActivity {
 
             if(imageUri != null){
                 uploadToFirebase(imageUri);
+            } else {
+                // 이미지가 없어도, 이미지를 비우고 insert
+                startInsert(new PostDataPut(u_id, title, contents, null, category_label, price, location));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -165,14 +168,14 @@ public class AddPostActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                fileRef.getDownloadUrl().
+                        addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         // 나중에 접근 가능한 uri를 db에 넣자!
                         Log.d("이미지 파일 업로드 성공 !!", uri.toString());
 
                         img = uri.toString();
-                        Log.d("img 변수는" , img);
 
                         // uri를 img에 string으로 저장
                         startInsert(new PostDataPut(u_id, title, contents, uri.toString(), category_label, price, location));
@@ -182,6 +185,7 @@ public class AddPostActivity extends AppCompatActivity {
 
                         Toast.makeText(AddPostActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                     }
+
                 });
 
             }
@@ -206,9 +210,6 @@ public class AddPostActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PostDataPutResponse> call, Response<PostDataPutResponse> response) {
                 PostDataPutResponse result = response.body();
-                data.PutPostDataPrint();
-                Log.e("u_id : ", String.valueOf(u_id));
-                Log.e("category :", String.valueOf(category_label));
                 if(response == null){
                     Log.e("", String.valueOf("response는 null"));
                 }

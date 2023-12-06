@@ -216,12 +216,6 @@ public class PostActivity extends AppCompatActivity {
                     Log.d("post 불러오기 성공", String.valueOf("1"));
 
                     List<Post> posts = result.getPosts();
-                    for(Post post : posts){
-                        Log.d("id는", String.valueOf(post.post_id));
-                        Log.d("nickname", String.valueOf(post.nickname));
-                        Log.d("title", String.valueOf(post.title));
-                        Log.d("img", String.valueOf(post.img));
-                    }
 
                     showPost(posts);
                 }
@@ -241,6 +235,7 @@ public class PostActivity extends AppCompatActivity {
 
         for (int i = posts.size() - 1; i >= 0; i--) {
             Post post = posts.get(i);
+
             postPreviews.add(new PostPreview("프로필 이미지 URL", post.nickname, post.img, post.title));
         }
 
