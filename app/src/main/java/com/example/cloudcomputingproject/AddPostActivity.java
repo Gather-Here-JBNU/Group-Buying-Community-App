@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cloudcomputingproject.datas.PostDataPut;
@@ -44,6 +45,7 @@ import retrofit2.Response;
 
 public class AddPostActivity extends AppCompatActivity {
     Toolbar toolbar;
+    TextView toolbarTitle;
     private APIInterface service;
 
     EditText title_et, contents_et, img_et, price_et, location_et;
@@ -60,8 +62,15 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addpost);
 
+
+        img_iv = findViewById(R.id.img_iv);
+        progressBar = findViewById(R.id.progress_view);
+
         toolbar = findViewById(R.id.toolbar);
+        toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
@@ -70,8 +79,10 @@ public class AddPostActivity extends AppCompatActivity {
         u_id = intent.getStringExtra("u_id"); // 로그인할때 전달해준 u_id를 변수에 저장.
         category_label = intent.getStringExtra("category"); // PostActivity에서 선택한 category 전달.
 
-        img_iv = findViewById(R.id.img_iv);
-        progressBar = findViewById(R.id.progress_view);
+        //툴바의 textView에 category_label 설정
+        toolbarTitle.setText(category_label);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         // 초기에는 프로그래스바 감추기
         progressBar.setVisibility(View.INVISIBLE);

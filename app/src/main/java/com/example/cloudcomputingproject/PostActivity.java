@@ -73,26 +73,18 @@ public class PostActivity extends AppCompatActivity {
         // 임시 데이터 생성
         postPreviews = new ArrayList<>();
         // 여기에 임의의 데이터 추가...
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목", "게시글 요약"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
+        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
 
-        // 어댑터 생성 및 설정
-        adapter = new PostAdapter(postPreviews);
-        recyclerView.setAdapter(adapter);
 
-        // CustomItemDecoration을 추가합니다.
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_decoration_margin);
-        recyclerView.addItemDecoration(new PostActivity.CustomItemDecoration(spacingInPixels));
 
         // FloatingActionButton 초기화
         postingButton = findViewById(R.id.postingButton);
@@ -147,7 +139,7 @@ public class PostActivity extends AppCompatActivity {
                     categories.add("채팅 확인용");
                     categories.add("게시글 확인용");
                     categories.add("마이페이지 확인용");
-                    categories.add("----------카테고리 추가하기 ----------");
+                    categories.add("카테고리 추가하기");
 
                     // 스피너 초기화
                     spinner = findViewById(R.id.categorySelectBar); // XML 파일에 정의된 스피너 ID
@@ -167,9 +159,9 @@ public class PostActivity extends AppCompatActivity {
                             String item = parent.getItemAtPosition(position).toString();
                             category = item;
                             if(item.equals("전체 게시글")){
-                                // 전체 게시글이 선택되었을 때, 전체 post data 가져오기.
+                                startGetPosts(new MainPostDataGet("전체 게시글"));
                             }
-                            else if(item.equals("----------카테고리 추가하기 ----------")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
+                            else if(item.equals("카테고리 추가하기")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
                                 Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
                                 startActivity(intent);
                             } else if(item.equals("채팅 확인용")) { // 채팅 확인용. 누를시 채팅 액티비티 이동.
@@ -230,6 +222,7 @@ public class PostActivity extends AppCompatActivity {
                         Log.d("img", String.valueOf(post.img));
                     }
 
+                    showPost(posts);
                 }
             }
             @Override
@@ -240,5 +233,23 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void showPost(List<Post> posts){
+
+        postPreviews = new ArrayList<>();
+
+        for (int i = posts.size() - 1; i >= 0; i--) {
+            Post post = posts.get(i);
+            postPreviews.add(new PostPreview("프로필 이미지 URL", post.nickname, post.img, post.title));
+        }
+
+
+        // 어댑터 생성 및 설정
+        adapter = new PostAdapter(postPreviews);
+        recyclerView.setAdapter(adapter);
+
+        // CustomItemDecoration을 추가합니다.
+        //int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_decoration_margin);
+        //recyclerView.addItemDecoration(new PostActivity.CustomItemDecoration(spacingInPixels));
     }
 }

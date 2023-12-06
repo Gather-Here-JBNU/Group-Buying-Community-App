@@ -7,13 +7,12 @@ public class PostPreview {
     private String title;
     private String summary;
 
-    public PostPreview(String profileImageUrl, String userName, String postImageUrl, String title, String summary) {
+    public PostPreview(String profileImageUrl, String userName, String postImageUrl, String title) {
 
         this.profileImageUrl = profileImageUrl;
         this.userName = userName;
         this.postImageUrl = postImageUrl;
         this.title = title;
-        this.summary = summary;
     }
 
     // Getters and Setters
@@ -33,9 +32,6 @@ public class PostPreview {
 
     public String getSummary() {
         return summary;
-    }
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     public String getProfileImageUrl() {

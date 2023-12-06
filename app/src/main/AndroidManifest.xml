@@ -63,6 +63,7 @@
             android:exported="false" />
         <activity
             android:name=".ProfileChange"
+            android:parentActivityName=".Mypage"
             android:exported="false" />
         <activity
             android:name=".ViewCommentActivity"

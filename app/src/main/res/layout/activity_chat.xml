@@ -8,20 +8,19 @@
     tools:context=".ChatActivity">
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnFinish"
-        android:background="@drawable/button_rounded"
-        android:text="나가기"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="15dp"
+        android:background="@color/grey"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@id/my_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="채팅방(임시)"
+        app:titleTextAppearance="@style/ToolbarTitleText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"
@@ -32,40 +31,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFinish"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSend"
-        android:src="@drawable/little_send"
-        android:scaleType="centerInside"
         android:background="@color/cyanBlue"
         android:padding="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/little_send"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
+        android:id="@+id/etText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etText"
+        android:backgroundTint="@color/white"
         android:paddingHorizontal="10dp"
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/my_recycler_view"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSend"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSend"/>
+        app:layout_constraintTop_toBottomOf="@id/my_recycler_view" />
 
     <TextView
+        android:id="@+id/llTop"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/llTop"
-        android:textSize="30sp"
         android:gravity="center_vertical"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/my_recycler_view"
+        app:layout_constraintEnd_toStartOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnFinish"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/my_recycler_view"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,14 @@
 package com.example.cloudcomputingproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +42,8 @@ public class ChatActivity extends AppCompatActivity {
     FirebaseDatabase database;
     APIInterface service;
     String u_id, email, nickname, emailCheck, time; // u_id
+
+    Toolbar toolbar;
     Intent intent;
 
     @Override
@@ -52,13 +56,17 @@ public class ChatActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
+
         // Intent로부터 u_id 가져오기
         intent = getIntent();
         u_id = intent.getStringExtra("u_id"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 u_id 요소 가져오기.
         emailCheck = intent.getStringExtra("email"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 email 요소 가져오기.
 
         // UI 구성 요소
-        TextView btnFinish = findViewById(R.id.btnFinish);
+
         ImageView ivSend = findViewById(R.id.btnSend);
         EditText etText = findViewById(R.id.etText);
 
@@ -74,8 +82,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
 
-        //나가기 버튼 활성화
-        btnFinish.setOnClickListener(v -> finish());
 
         // Firebase Realtime Database의 ChildEventListener 설정
         ChildEventListener childEventListener = new ChildEventListener() {
@@ -191,5 +197,15 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //나가기 버튼 활성화
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) { // 툴바의 뒤로가기 버튼이 눌렸을 때
+            onBackPressed(); // 현재 액티비티를 종료하고 이전 액티비티로 돌아갑니다.
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
