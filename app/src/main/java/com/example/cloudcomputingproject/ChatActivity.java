@@ -41,7 +41,7 @@ public class ChatActivity extends AppCompatActivity {
     MyAdapter mAdapter;
     FirebaseDatabase database;
     APIInterface service;
-    String u_id, email, nickname, emailCheck, time; // u_id
+    String u_id, email, nickname, title, emailCheck, time; // u_id
 
     Toolbar toolbar;
     Intent intent;
@@ -56,17 +56,19 @@ public class ChatActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
 
         // Intent로부터 u_id 가져오기
         intent = getIntent();
         u_id = intent.getStringExtra("u_id"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 u_id 요소 가져오기.
         emailCheck = intent.getStringExtra("email"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 email 요소 가져오기.
+        title = intent.getStringExtra("title");
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
+        getSupportActionBar().setTitle(title);
 
         // UI 구성 요소
-
         ImageView ivSend = findViewById(R.id.btnSend);
         EditText etText = findViewById(R.id.etText);
 
@@ -137,7 +139,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        DatabaseReference ref = database.getReference("message");
+        DatabaseReference ref = database.getReference(title);
         ref.addChildEventListener(childEventListener);
 
         // 메시지 전송을 위한 클릭 리스너
@@ -159,7 +161,7 @@ public class ChatActivity extends AppCompatActivity {
             Log.d(TAG,"email은 \"" + stEmail + "\" text는 \"" + stText + "\" time은 \"" + time + "\" 입니다.");
 
             // Firebase Realtime Database에 데이터 전송
-            DatabaseReference myRef = database.getReference("message").child(datetime);
+            DatabaseReference myRef = database.getReference(title).child(datetime);
             myRef.setValue(chat);
             etText.getText().clear();
         });
