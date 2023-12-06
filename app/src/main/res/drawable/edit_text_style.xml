@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 기존 배경 스타일 -->
+    <item>
+        <shape>
+            <solid android:color="#ffffff"/> <!-- 여기에 원하는 배경색을 설정 -->
+        </shape>
+    </item>
+
+    <!-- 테두리 추가 -->
+    <item>
+        <shape>
+            <stroke
+                    android:width="2dp"
+                    android:color="@color/colorFocus"/> <!-- 테두리 색상 및 두께 -->
+            <corners android:radius="4dp"/> <!-- 모서리 둥글기 -->
+        </shape>
+    </item>
+</layer-list>

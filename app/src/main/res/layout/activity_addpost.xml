@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddPostActivity"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="임시 타이틀"
+            app:titleTextAppearance="@style/ToolbarTitleText" />
+
+        <View
+            android:background="#D3D3D3"
+            android:layout_width="match_parent"
+            android:layout_height="2px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+
+
+        </LinearLayout>
+
+        <!--
+        이미지 선택
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이미지 선택"
+                android:textSize="13sp"
+                android:alpha="0.5"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/border_radius">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/image_regular"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"/>
+        </LinearLayout>
+
+        <!--
+        게시글 작성
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제목"
+                android:textSize="13sp"
+                android:alpha="0.5"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_style"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="글 작성"
+                android:textSize="13sp"
+                android:alpha="0.5"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_style"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:maxLines="10"
+                android:scrollbars="vertical"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
