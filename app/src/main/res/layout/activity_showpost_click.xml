@@ -2,29 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="15dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical">
 
-        <android.widget.Button
-            android:layout_width="45dp"
-            android:layout_height="40dp"
+        <Button
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/arrow_left" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <!--카테코리명-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="보충제"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
             android:layout_weight="1" />
 
-        <android.widget.Button
+        <Button
             android:id="@+id/saveBtn"
             android:layout_width="15dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ellipsis_vertical_solid" />
+            android:layout_height="44dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ellipsis_vertical_solid"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
 
     <View
@@ -35,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:alpha="0.3"
-        android:background="@color/black" />
+        android:background="@android:color/black" />
 
     <View
         android:layout_width="match_parent"
@@ -44,8 +54,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -53,12 +64,14 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/baby" />
-
+                android:src="@drawable/baby"
+                app:civ_border_overlay="true"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@android:color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,12 +81,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <android.widget.Button
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:background="@color/colorFocus"
-            android:text="연락하기"
-            android:textColor="@color/black" />
+
     </LinearLayout>
 
     <View
@@ -86,31 +94,88 @@
         android:scaleType="centerCrop"
         android:src="@drawable/baby" />
 
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="25dp" />
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@android:color/black" />
 
-    <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="같이 구매할사람"
+        android:textStyle="bold"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/post_title"/>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_style"
         android:inputType="textMultiLine"
         android:maxLines="10"
         android:minLines="4"
+        android:padding="15dp"
         android:scrollbars="vertical"
-        android:text="글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다"
+        android:text="위 상품을 같이 구매하고 싶습니다."
         android:textSize="13sp"
-        android:padding="15dp"/>
+        android:id="@+id/post_info"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:alpha="0.3"
-        android:background="@color/black" />
+        android:background="@android:color/black" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상품 가격: 50000원"
+        android:paddingVertical="13dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="구매 경로: www.coupang.com"
+        android:paddingVertical="13dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.3"
+        android:background="@android:color/black" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="13dp" />
+        android:layout_height="70dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_button"
+            android:text="찜하기"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_button"
+            android:text="연락하기"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
