@@ -8,40 +8,50 @@
     android:orientation="vertical"
     tools:context=".Mypage">
 
-    <LinearLayout
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:paddingLeft="10dp"-->
+<!--        android:paddingRight="10dp"-->
+<!--        android:paddingTop="5dp">-->
+
+<!--        <android.widget.Button-->
+<!--            android:layout_width="32dp"-->
+<!--            android:layout_height="29dp"-->
+<!--            android:background="@drawable/arrow_left"-->
+<!--            android:layout_gravity="center_vertical"/>-->
+
+<!--        &lt;!&ndash; 툴바와 오른쪽 버튼 &ndash;&gt;-->
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="#EEEEEE"-->
+<!--            android:minHeight="?attr/actionBarSize"-->
+<!--            android:theme="?attr/actionBarTheme"-->
+<!--            app:titleTextAppearance="@style/ToolbarTitleText"-->
+<!--            android:layout_gravity="center_vertical">-->
+
+<!--            <android.widget.Button-->
+<!--                android:id="@+id/saveBtn"-->
+<!--                android:layout_width="15dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/ellipsis_vertical_solid"-->
+<!--                android:layout_gravity="end" />-->
+<!--        </androidx.appcompat.widget.Toolbar>-->
+<!--    </LinearLayout>-->
+<!--    AppBar = mypage와 동일-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp">
-
-        <android.widget.Button
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:background="@drawable/arrow_left"
-            android:layout_gravity="center_vertical"/>
-
-        <!-- 툴바와 오른쪽 버튼 -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#EEEEEE"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:titleTextAppearance="@style/ToolbarTitleText"
-            android:layout_gravity="center_vertical">
-
-            <android.widget.Button
-                android:id="@+id/saveBtn"
-                android:layout_width="15dp"
-                android:layout_height="50dp"
-                android:background="@drawable/ellipsis_vertical_solid"
-                android:layout_gravity="end" />
-        </androidx.appcompat.widget.Toolbar>
-    </LinearLayout>
+        android:background="#EEEEEE"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="닉네임"
+        app:titleTextAppearance="@style/ToolbarTitleText" />
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp" />
@@ -73,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="홍길동"
+            android:text="닉네임"
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center_vertical" />
