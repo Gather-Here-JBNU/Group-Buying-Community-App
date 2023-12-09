@@ -11,6 +11,7 @@ import com.example.cloudcomputingproject.datas.UserDataInsert;
 import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 import com.example.cloudcomputingproject.datas.UserDataUpdate;
 import com.example.cloudcomputingproject.datas.UserDataUpdateResponse;
+import com.example.cloudcomputingproject.datas.CategoryData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -35,4 +36,7 @@ public interface APIInterface {
 
     @POST("/user/update")
     Call<UserDataUpdateResponse> UserUpdate(@Body UserDataUpdate data);
+
+    @POST("/category/add")
+    Call<CategoryDataResponse> addCategory(@Body CategoryData category);
 }
