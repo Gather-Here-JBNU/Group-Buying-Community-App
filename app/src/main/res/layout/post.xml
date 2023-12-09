@@ -38,6 +38,12 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:contentDescription="@string/postingButton_description"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        app:srcCompat="@drawable/addbtn"
+        app:maxImageSize="56dp"
+        app:backgroundTint="@android:color/transparent"
+        app:rippleColor="@android:color/transparent"
+        app:elevation="0dp"
+        app:pressedTranslationZ="0dp"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
