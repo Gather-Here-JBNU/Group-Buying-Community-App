@@ -2,44 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:gravity="center_vertical">
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="게시글"
+        app:titleTextAppearance="@style/ToolbarTitleText" />
 
-        <Button
-            android:layout_width="37dp"
-            android:layout_height="33dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/arrow_left" />
-
-        <!--카테코리명-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="보충제"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/saveBtn"
-            android:layout_width="15dp"
-            android:layout_height="44dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/ellipsis_vertical_solid"
-            android:layout_marginLeft="20dp"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
 
     <View
         android:layout_width="match_parent"
