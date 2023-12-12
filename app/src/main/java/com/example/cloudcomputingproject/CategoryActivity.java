@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,7 +28,7 @@ public class CategoryActivity extends AppCompatActivity {
     private List<CategoryItem> categoryList;
     private APIInterface service;
     private EditText categoryEditText;
-    private Button categoryAddButton;
+    private ImageButton categoryAddButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
