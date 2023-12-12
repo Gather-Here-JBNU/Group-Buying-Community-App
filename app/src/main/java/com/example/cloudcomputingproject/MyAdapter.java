@@ -1,16 +1,19 @@
 package com.example.cloudcomputingproject;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private ArrayList<Chat> mDataset;
+    private static ArrayList<Chat> mDataset;
     String stMyEmail = "";
 
     /**
@@ -21,12 +24,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public TextView textView;
         public TextView nickname;
         public TextView time;
+        public AppCompatImageView profile;
         public MyViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View
             textView = v.findViewById(R.id.tvChat);
             nickname = v.findViewById(R.id.tvNickname);
             time = v.findViewById(R.id.tvTime);
+            profile = v.findViewById(R.id.ivProfile);
+
+            profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = textView.getContext();
+                    Intent in = new Intent(context, MyPage2.class);
+
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        String userEmail = mDataset.get(position).getEmail();
+                        in.putExtra("email",userEmail);
+                        context.startActivity(in);
+                    }
+                }
+            });
         }
     }
 

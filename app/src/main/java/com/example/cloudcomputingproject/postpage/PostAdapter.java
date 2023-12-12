@@ -18,7 +18,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     private List<PostPreview> postList;
     private String u_id, email;
-    String title;
 
     public PostAdapter(List<PostPreview> postList, String u_id, String email) {
         this.postList = postList;
@@ -30,24 +29,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_preview_template, parent, false);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = (int) v.getTag();
+        view.setOnClickListener(v -> {
+            int position = (int) v.getTag();
 
-                PostPreview post = postList.get(position);
+            PostPreview post = postList.get(position);
 
-                //parent로부터 context가져오기
-                Context context = parent.getContext();
+            //parent로부터 context가져오기
+            Context context = parent.getContext();
 
-                //ChatActivity 이동
-                Intent in = new Intent(context, ChatActivity.class);
-                in.putExtra("u_id", u_id);
-                in.putExtra("email", email);
-                in.putExtra("title", post.getTitle());
-                context.startActivity(in);
+            //ChatActivity 이동
+            Intent in = new Intent(context, ChatActivity.class);
+            in.putExtra("u_id", u_id);
+            in.putExtra("email", email);
+            in.putExtra("title", post.getTitle());
+            context.startActivity(in);
 
-            }
         });
         return new PostViewHolder(view);
     }
