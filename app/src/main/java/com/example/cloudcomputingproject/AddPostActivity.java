@@ -62,7 +62,6 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addpost);
 
-
         img_iv = findViewById(R.id.img_iv);
         progressBar = findViewById(R.id.progress_view);
 
@@ -181,11 +180,10 @@ public class AddPostActivity extends AppCompatActivity {
                         startInsert(new PostDataPut(u_id, title, contents, uri.toString(), category_label, price, location));
                         // 이후, uri를 포함하여 db에 insert
                         //프로그래스바 숨김
-                        progressBar.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.GONE);
 
                         Toast.makeText(AddPostActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                     }
-
                 });
 
             }

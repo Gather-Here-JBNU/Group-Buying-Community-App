@@ -83,8 +83,6 @@ public class ChatActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(chatArrayList, emailCheck);
         recyclerView.setAdapter(mAdapter);
 
-
-
         // Firebase Realtime Database의 ChildEventListener 설정
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
