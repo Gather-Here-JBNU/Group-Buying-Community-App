@@ -21,6 +21,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CategoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -29,11 +31,13 @@ public class CategoryActivity extends AppCompatActivity {
     private APIInterface service;
     private EditText categoryEditText;
     private ImageButton categoryAddButton;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category);
+
 
         categoryEditText = findViewById(R.id.categoryEditText);
         categoryAddButton = findViewById(R.id.categoryAddButton);
@@ -44,6 +48,16 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new CustomItemDecoration(getResources().getDimensionPixelSize(R.dimen.item_decoration_margin)));
         service = RetrofitClient.getClient().create(APIInterface.class);
+
+        // Category라는 문자열이 xml코드의 수정을 통해서도 툴바에 안나타나길래 넣은 부분입니다.
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.category_title);
+        }
+
+
+
 
         // 카테고리 데이터를 서버로부터 가져오는 메서드 호출
         getCategoryFromServer();

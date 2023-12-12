@@ -1,89 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical"
+    android:background="#EEEEEE">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#EEEEEE"
+        android:theme="?attr/actionBarTheme"
+        android:title="@string/category_title"
+        android:titleTextAppearance="@style/ToolbarTitleText"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:elevation="0dp"
+        android:background="#EEEEEE"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#EEEEEE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/category_add_layout_shape"
+        android:orientation="horizontal"
+        android:elevation="5dp"
+        android:layout_margin="5dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/categoryEditText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:title="Category"
-            app:titleTextAppearance="@style/ToolbarTitleText"
-            android:background="#EEEEEE"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryView"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_weight="5"
-            android:background="#EEEEEE"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/category_add_layout_shape"
-            android:orientation="horizontal"
-            android:elevation="40dp">
+            android:layout_marginStart="15dp"
+            android:inputType="text"
+            android:hint="카테고리 추가하기"
+            android:paddingTop="30dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="5dp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="9"
-                >
-
-
-                <EditText
-                    android:id="@+id/categoryEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:hint="카테고리 추가하기"
-                    android:paddingTop="30dp"
-                    android:textSize="14sp"
-                />
-
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/categoryAddButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_margin="12dp"
-                android:textSize="20sp"
-                android:background="@drawable/category_add_button"
-                android:src="@drawable/add_button"
-                android:scaleType="centerInside"
-                android:layout_gravity="bottom"
-                android:paddingTop="5dp"
-                android:paddingBottom="15dp"
-                android:paddingRight="20dp"
-                />
-
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/categoryAddButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/category_add_button"
+            android:src="@drawable/add_button"
+            android:scaleType="centerInside"
+            android:contentDescription="Add category"
+            android:padding="12dp"/>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
