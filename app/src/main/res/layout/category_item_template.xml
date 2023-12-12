@@ -5,7 +5,8 @@
     android:layout_height="50dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    android:background="@drawable/category_item_template_shape">
+    android:background="@drawable/category_item_template_shape"
+    android:elevation="20dp">
 
     <ImageButton
         android:id="@+id/favoriteButton"
