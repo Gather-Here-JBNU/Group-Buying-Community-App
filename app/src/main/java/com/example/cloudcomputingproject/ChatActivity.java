@@ -191,7 +191,7 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserDataGetResponse> call, Throwable t) {
-                Toast.makeText(ChatActivity.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "채팅 에러 발생", Toast.LENGTH_SHORT).show();
                 Log.e("유저 데이터 불러오기 실패", t.getMessage());
                 t.printStackTrace();
             }

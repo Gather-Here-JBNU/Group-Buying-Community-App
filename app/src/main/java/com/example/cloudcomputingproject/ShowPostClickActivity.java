@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,9 +15,6 @@ import android.widget.Toast;
 
 import com.example.cloudcomputingproject.datas.LikeData;
 import com.example.cloudcomputingproject.datas.LikeDataResponse;
-import com.example.cloudcomputingproject.datas.MainPostDataGet;
-import com.example.cloudcomputingproject.datas.MainPostDataGetResponse;
-import com.example.cloudcomputingproject.datas.Post;
 import com.example.cloudcomputingproject.datas.PostViewGet;
 import com.example.cloudcomputingproject.datas.PostViewGetResponse;
 import com.example.cloudcomputingproject.datas.UserDataGet;
@@ -24,8 +22,8 @@ import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +34,10 @@ public class ShowPostClickActivity extends AppCompatActivity {
 
     private boolean isFavorite = false;
     ImageView like_iv, img_iv;
-    String post_id, title, nickname, info, price, location, user_id, email, cur_nickname;
+    String post_id, title, nickname, info, price, location, user_id, email,
+            cur_nickname, img, contents;
+
+    TextView nickname_tv, contents_tv, price_tv, location_tv;
 
     Intent intent;
 
@@ -50,6 +51,12 @@ public class ShowPostClickActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         like_iv  = findViewById(R.id.like_iv);
+        img_iv = findViewById(R.id.img_iv);
+        nickname_tv = findViewById(R.id.nickname_tv);
+        contents_tv = findViewById(R.id.contents_tv);
+        price_tv = findViewById(R.id.price_tv);
+        location_tv = findViewById(R.id.location_tv);
+
 
         intent = getIntent();
         post_id = intent.getStringExtra("post_id");
@@ -153,25 +160,48 @@ public class ShowPostClickActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PostViewGetResponse> call, Response<PostViewGetResponse> response) {
                 PostViewGetResponse result = response.body();
+                Log.d("만세","만세");
 
                 if (result.getCode() == 200) {
                     Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
 
                     title = result.getTitle();       // 제목 가져오기
                     nickname = result.getNickname(); // 닉네임 가져오기.
-                    info = result.getNickname(); // 본문 가져오기.
-                    price = result.getNickname(); // 가격 가져오기.
-                    location = result.getNickname(); // 지역 가져오기.
+                    img = result.getImg();
+                    contents = result.getContents(); // 본문 가져오기.
+                    price = result.getPrice(); // 가격 가져오기.
+                    location = result.getLocation(); // 지역 가져오기.
+
+                    getSupportActionBar().setTitle(title);
+                    nickname_tv.setText(nickname);
+                    contents_tv.setText(contents);
+                    price_tv.setText("가격 : "+price);
+                    location_tv.setText("장소 : "+location);
+                    Picasso.get()
+                            .load(img)
+                            .into(img_iv);
+
+
+
                 }
             }
 
             @Override
             public void onFailure(Call<PostViewGetResponse> call, Throwable t) {
-
+                Toast.makeText(ShowPostClickActivity.this, "포스트 불러오기 오류 발생", Toast.LENGTH_SHORT).show();
+                Log.e("포스트 불러오기 실패", t.getMessage());
+                t.printStackTrace();
             }
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) { // 툴바의 뒤로가기 버튼이 눌렸을 때
+            onBackPressed(); // 현재 액티비티를 종료하고 이전 액티비티로 돌아갑니다.
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void startUserGet(UserDataGet data){ // 입력된 데이터, u_id를바탕으로 통신할 것임.
         service.UserGet(data).enqueue(new Callback<UserDataGetResponse>() {
             @Override

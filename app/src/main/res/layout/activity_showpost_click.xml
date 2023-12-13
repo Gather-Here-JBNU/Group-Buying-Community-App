@@ -85,7 +85,6 @@
         android:background="@android:color/black" />
 
     <TextView
-        android:id="@+id/contents_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="본문"
@@ -93,7 +92,9 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         />
+
     <TextView
+        android:id="@+id/contents_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -102,8 +103,7 @@
         android:padding="15dp"
         android:scrollbars="vertical"
         android:text="위 상품을 같이 구매하고 싶습니다."
-        android:textSize="13sp"
-        android:id="@+id/post_info"/>
+        android:textSize="13sp" />
 
     <View
         android:layout_width="match_parent"
