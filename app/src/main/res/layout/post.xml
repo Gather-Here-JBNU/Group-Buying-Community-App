@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#FFFFFF">
 
     <LinearLayout
@@ -11,16 +12,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/categorySelectBar"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_gravity="left|top"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="left|top"
-            />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:titleMarginStart="30dp"
+            app:title="게시글"
+            app:titleTextAppearance="@style/ToolbarTitleText">
+
+
+            <ImageView
+                android:id="@+id/profile_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/baseline_person" />
+
+            <ImageView
+                android:id="@+id/category_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:clipToOutline="true"
+                android:src="@drawable/baseline_toc" />
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postView"
@@ -38,12 +57,11 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:contentDescription="@string/postingButton_description"
-        app:srcCompat="@drawable/addbtn"
-        app:maxImageSize="56dp"
         app:backgroundTint="@android:color/transparent"
-        app:rippleColor="@android:color/transparent"
         app:elevation="0dp"
-        app:pressedTranslationZ="0dp"/>
+        app:maxImageSize="56dp"
+        app:pressedTranslationZ="0dp"
+        app:rippleColor="@android:color/transparent" />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

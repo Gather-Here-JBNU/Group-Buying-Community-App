@@ -6,9 +6,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -17,15 +15,11 @@ import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
-import com.example.cloudcomputingproject.datas.CategoryDataResponse;
 import com.example.cloudcomputingproject.datas.MainPostDataGet;
 import com.example.cloudcomputingproject.datas.MainPostDataGetResponse;
 import com.example.cloudcomputingproject.datas.Post;
-import com.example.cloudcomputingproject.datas.UserDataGet;
-import com.example.cloudcomputingproject.datas.UserDataGetResponse;
-import com.example.cloudcomputingproject.datas.UserDataInsert;
-import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 import com.example.cloudcomputingproject.postpage.PostAdapter;
 import com.example.cloudcomputingproject.postpage.PostPreview;
 import com.example.cloudcomputingproject.utility.APIInterface;
@@ -48,33 +42,44 @@ public class PostActivity extends AppCompatActivity {
     private APIInterface service;
     List<String> category_label;
     List<String> categories = new ArrayList<>();
+    ImageView category_iv, profile_iv;
+    Intent intent;
+    Toolbar toolbar;
 
-    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post); // 여러분의 레이아웃 파일 이름으로 변경하세요.
-        Intent intent = getIntent();
+        intent = getIntent();
         u_id = FirebaseAuth.getInstance().getUid(); // 로그인할때 전달해준 u_id를 변수에 저장.
         email = intent.getStringExtra("email"); // 로그인할때 전달해준 email를 변수에 저장.
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
 
-        startGetCategory();
-        // startGet에서 카테고리를 받아오고, categories.add를 수행
 
         // categorySelectbox스피너 아이템 선택 이벤트 리스너 설정
 
+        category = intent.getStringExtra("categoryName");
+        if(category == null){
+            category = "전체 게시글";
+        }
 
+        startGetPosts(new MainPostDataGet(category));
         // RecyclerView 초기화
         recyclerView = findViewById(R.id.postView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(category);
 
         // 임시 데이터 생성
         postPreviews = new ArrayList<>();
         // 여기에 임의의 데이터 추가...
 
+        category_iv = findViewById(R.id.category_iv);
+        profile_iv = findViewById(R.id.profile_iv);
         // FloatingActionButton 초기화
         postingButton = findViewById(R.id.postingButton);
         postingButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +89,21 @@ public class PostActivity extends AppCompatActivity {
                 Intent intent = new Intent(PostActivity.this, AddPostActivity.class);
                 intent.putExtra("u_id", u_id);
                 intent.putExtra("category", category);
+                startActivity(intent);
+            }
+        });
+
+        category_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+        profile_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PostActivity.this, Mypage.class);
                 startActivity(intent);
             }
         });
@@ -106,92 +126,6 @@ public class PostActivity extends AppCompatActivity {
             }
         }
     }
-
-    private void startGetCategory(){
-        service.CategoryGet().enqueue(new Callback<CategoryDataResponse>() {
-            @Override
-            public void onResponse(Call<CategoryDataResponse> call, Response<CategoryDataResponse> response) {
-                CategoryDataResponse result = response.body();
-                Log.d("카테고리 Respnose 안입니다.", ".");
-                if (result.getCode() == 200) {
-                    Log.e("카테고리 정보 불러오기 성공.", String.valueOf("."));
-
-                    category_label = result.getCategoryLabel();
-
-                    categories.add("전체 게시글");
-
-                    for(String category : category_label){
-                        Log.d("Category : ", category);
-                        categories.add(category);
-                    }
-
-                    categories.add("채팅 확인용");
-                    categories.add("게시글 확인용");
-                    categories.add("마이페이지 확인용");
-                    categories.add("카테고리 추가하기");
-
-                    // 스피너 초기화
-                    spinner = findViewById(R.id.categorySelectBar); // XML 파일에 정의된 스피너 ID
-
-                    // 스피너에 들어갈 데이터 리스트 생성 (db의 카테고리 리스트에서 받아온 키로 생성할 예정)
-
-                    // 어댑터 생성 및 설정
-                    ArrayAdapter<String> postpageCategorySpinnerAdapter = new ArrayAdapter<>(PostActivity.this, R.layout.postpage_category_spinner_item, categories); // 스피너를 클릭하지 않았을 때의 기본 레이아웃
-                    postpageCategorySpinnerAdapter.setDropDownViewResource(R.layout.postpage_category_spinner_listview); //스피너를 클릭해서 드롭다운 했을 때의 레이아웃
-                    spinner.setAdapter(postpageCategorySpinnerAdapter);
-
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            // 아이템 선택시 동작
-
-                            String item = parent.getItemAtPosition(position).toString();
-                            category = item;
-                            if(item.equals("전체 게시글")){
-                                startGetPosts(new MainPostDataGet("전체 게시글"));
-                            }
-                            else if(item.equals("카테고리 추가하기")){ // 카테고리 추가 선택 시 ,카테고리 추가 액티비티로 이동
-                                Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
-                                startActivity(intent);
-                            } else if(item.equals("채팅 확인용")) { // 채팅 확인용. 누를시 채팅 액티비티 이동.
-                                Intent intent = new Intent(PostActivity.this, ChatActivity.class);
-                                intent.putExtra("u_id", u_id);
-                                intent.putExtra("email", email);
-                                intent.putExtra("title", "임시");
-                                startActivity(intent);
-                            } else if(item.equals("게시글 확인용")) { // 게시글 확인용. 누를시 게시글 액티비티 이동.
-                                Intent intent = new Intent(PostActivity.this, ShowPostClickActivity.class);
-                                startActivity(intent);
-                            } else if(item.equals("마이페이지 확인용")){
-                                Intent intent = new Intent(PostActivity.this, Mypage.class);
-                                startActivity(intent);
-                            } else {
-                                // db의 카테고리를 눌렀을 때, 정보를 게시글로 불러와야 함.
-                                Log.d("카테고리는", category); // 성공
-
-                                startGetPosts(new MainPostDataGet(category));
-                            }
-                            // 선택된 아이템을 사용한 추가 동작 구현
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-                            // 아무것도 선택되지 않았을 때의 동작
-                        }
-                    });
-                    //finish();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CategoryDataResponse> call, Throwable t) {
-                Toast.makeText(PostActivity.this, "카테고리 정보 불러오기 실패", Toast.LENGTH_SHORT).show();
-                Log.e("카테고리 정보 불러오기 실패.", t.getMessage());
-                t.printStackTrace();
-            }
-        });
-    }
-
 
     private void startGetPosts(MainPostDataGet data){ // 카테고리 라벨을 바탕으로 통신
         service.PostListGet(data).enqueue(new Callback<MainPostDataGetResponse>() {
