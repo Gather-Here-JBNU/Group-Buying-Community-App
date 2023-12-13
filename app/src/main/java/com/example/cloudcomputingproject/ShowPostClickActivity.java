@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.example.cloudcomputingproject.datas.MainPostDataGetResponse;
 import com.example.cloudcomputingproject.datas.Post;
 import com.example.cloudcomputingproject.datas.PostViewGet;
 import com.example.cloudcomputingproject.datas.PostViewGetResponse;
+import com.example.cloudcomputingproject.datas.UserDataGet;
 import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
@@ -34,10 +36,11 @@ public class ShowPostClickActivity extends AppCompatActivity {
 
     private boolean isFavorite = false;
     ImageView like_iv, img_iv;
-    String post_id, title, nickname, info, price, location, user_id;
+    String post_id, title, nickname, info, price, location, user_id, email, cur_nickname;
 
     Intent intent;
 
+    Button EnterChat_btn;
     private APIInterface service;
 
     @Override
@@ -53,10 +56,12 @@ public class ShowPostClickActivity extends AppCompatActivity {
         user_id = FirebaseAuth.getInstance().getUid();
         // post_id와 user_id를 통해 likes 테이블의 정보에 접근, 행의 존재 유무에 따라 isFavorite 상태 변경
 
+        EnterChat_btn = findViewById(R.id.EnterChat_btn);
+
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
 
-        startGet(new PostViewGet((post_id));
-
+        startGet(new PostViewGet(post_id));
+        startUserGet(new UserDataGet(user_id));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
         getSupportActionBar().setTitle(title);
@@ -66,6 +71,16 @@ public class ShowPostClickActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onStarClick();
+            }
+        });
+
+        EnterChat_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(ShowPostClickActivity.this, ChatActivity.class);
+                in.putExtra("email", email);
+                in.putExtra("title", title);
+                startActivity(in);
             }
         });
     }
@@ -126,7 +141,7 @@ public class ShowPostClickActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LikeDataResponse> call, Throwable t) {
-                Toast.makeText(ShowPostClickActivity.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShowPostClickActivity.this, "like 테이블 컨트롤 실패", Toast.LENGTH_SHORT).show();
                 Log.e("like 테이블 컨트롤 실패", t.getMessage());
                 t.printStackTrace();
             }
@@ -147,9 +162,6 @@ public class ShowPostClickActivity extends AppCompatActivity {
                     info = result.getNickname(); // 본문 가져오기.
                     price = result.getNickname(); // 가격 가져오기.
                     location = result.getNickname(); // 지역 가져오기.
-                    nickname = result.getNickname(); // 닉네임 가져오기.
-                    nickname = result.getNickname(); // 닉네임 가져오기.
-
                 }
             }
 
@@ -158,4 +170,31 @@ public class ShowPostClickActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void startUserGet(UserDataGet data){ // 입력된 데이터, u_id를바탕으로 통신할 것임.
+        service.UserGet(data).enqueue(new Callback<UserDataGetResponse>() {
+            @Override
+            public void onResponse(Call<UserDataGetResponse> call, Response<UserDataGetResponse> response) {
+                UserDataGetResponse result = response.body();
+                // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
+
+                if (result.getCode() == 200) {
+                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+
+                    email = result.getEmail();       // 이메일 가져오기
+                    cur_nickname = result.getNickname(); // 현재 유저의 닉네임 가져오기.
+                    //info = result.getInfo();       // 자기소개 가져오기 -> 필요없으면 쓰지 않으면 됨.
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<UserDataGetResponse> call, Throwable t) {
+                Log.e("유저 데이터 불러오기 실패", t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+    }
 }

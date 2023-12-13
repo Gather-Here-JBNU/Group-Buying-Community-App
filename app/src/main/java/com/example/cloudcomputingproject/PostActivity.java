@@ -163,7 +163,6 @@ public class PostActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else if(item.equals("마이페이지 확인용")){
                                 Intent intent = new Intent(PostActivity.this, Mypage.class);
-                                intent.putExtra("u_id", u_id);
                                 startActivity(intent);
                             } else {
                                 // db의 카테고리를 눌렀을 때, 정보를 게시글로 불러와야 함.

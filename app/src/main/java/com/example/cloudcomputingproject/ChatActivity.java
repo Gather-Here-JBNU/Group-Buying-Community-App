@@ -18,6 +18,7 @@ import com.example.cloudcomputingproject.datas.UserDataGet;
 import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // Intent로부터 u_id 가져오기
         intent = getIntent();
-        u_id = intent.getStringExtra("u_id"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 u_id 요소 가져오기.
+        u_id = FirebaseAuth.getInstance().getUid();
         emailCheck = intent.getStringExtra("email"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 email 요소 가져오기.
         title = intent.getStringExtra("title");
 

@@ -19,6 +19,7 @@ import com.example.cloudcomputingproject.datas.UserDataUpdate;
 import com.example.cloudcomputingproject.datas.UserDataUpdateResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
+import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +45,7 @@ public class ProfileChange extends AppCompatActivity {
 
         // Intent로부터 u_id 가져오기
         intent = getIntent();
-        u_id = intent.getStringExtra("u_id");
+        u_id = FirebaseAuth.getInstance().getUid();
 
         // UI 구성 요소
         tvEmail = findViewById(R.id.email_tv);

@@ -28,7 +28,7 @@ public class Mypage extends AppCompatActivity {
         setContentView(R.layout.activity_mypage);
 
         intent = getIntent();
-        u_id = intent.getStringExtra("u_id"); // 로그인할때 전달해준 u_id를 변수에 저장.
+        u_id = FirebaseAuth.getInstance().getUid();
 
         progressBar = findViewById(R.id.progressBar);
         animateProgressBar(36); // 원하는 프로그래스 값으로 애니메이션 실행
@@ -46,7 +46,6 @@ public class Mypage extends AppCompatActivity {
         changeButton.setOnClickListener(new View.OnClickListener(){  // 프로필 수정 버튼 클릭 시, 액티비티 이동
             public void onClick(View v){
                 Intent intent = new Intent(Mypage.this, ProfileChange.class);
-                intent.putExtra("u_id", u_id);
                 startActivity(intent);
             }
         });
