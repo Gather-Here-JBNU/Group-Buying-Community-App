@@ -24,34 +24,4 @@ public class LikePostDataReponse {
     public String getMessage() {
         return message;
     }
-
-    public static class PostItem {
-        @SerializedName("post_id")
-        private String postId;
-
-        @SerializedName("user_id")
-        private String userId;
-
-        @SerializedName("title")
-        private String title;
-
-        @SerializedName("nickname")
-        private String nickname;
-
-        public String getPostId() {
-            return postId;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getNickname() {
-            return nickname;
-        }
-    }
 }

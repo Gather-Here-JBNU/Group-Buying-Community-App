@@ -95,10 +95,12 @@ public class ChatActivity extends AppCompatActivity {
                 String stEmail = chat.getEmail();
                 String stText = chat.getText();
                 String stNickname = chat.getNickname();
+                String user_id = chat.getUserId();
                 Log.d(TAG, "stEmail: "+stEmail);
                 Log.d(TAG, "stText: "+stText);
                 Log.d(TAG, "stNickname: "+stNickname);
                 Log.d(TAG, "stTime: "+time);
+                Log.d(TAG, "user_id:" + user_id);
                 chatArrayList.add(chat);
                 mAdapter.notifyDataSetChanged();
             }
@@ -154,7 +156,7 @@ public class ChatActivity extends AppCompatActivity {
             SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
             time = timeformat.format(c.getTime());
 
-            Chat chat = new Chat(stEmail, stNickname, stText, time);
+            Chat chat = new Chat(stEmail, stNickname, stText, time, FirebaseAuth.getInstance().getUid());
 
             Log.d(TAG,"email은 \"" + stEmail + "\" text는 \"" + stText + "\" time은 \"" + time + "\" 입니다.");
 

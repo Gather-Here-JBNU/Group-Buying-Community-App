@@ -36,10 +36,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int position = getAdapterPosition();
                     Context context = textView.getContext();
                     Intent in = new Intent(context, MyPage2.class);
+                    in.putExtra("user_id", mDataset.get(position).getUserId());
 
-                    int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION){
                         String userEmail = mDataset.get(position).getEmail();
                         in.putExtra("email",userEmail);

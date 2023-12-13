@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
-            app:titleMarginStart="30dp"
             app:title="게시글"
+            app:titleMarginStart="20dp"
             app:titleTextAppearance="@style/ToolbarTitleText">
 
 
@@ -47,7 +47,6 @@
             android:layout_height="match_parent"
             android:background="#FFFFFF"
             android:layout_marginTop="2dp"/>
-
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -61,7 +60,7 @@
         app:elevation="0dp"
         app:maxImageSize="56dp"
         app:pressedTranslationZ="0dp"
+        app:srcCompat="@drawable/addbtn"
         app:rippleColor="@android:color/transparent" />
 
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

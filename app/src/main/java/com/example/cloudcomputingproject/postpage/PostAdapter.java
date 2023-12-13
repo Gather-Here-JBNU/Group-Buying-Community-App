@@ -29,7 +29,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     @Override
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_preview_template, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.postlist, parent, false);
 
         view.setOnClickListener(v -> {
             int position = (int) v.getTag();
@@ -60,19 +60,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         // 게시물 이미지 로딩, 실패 시 기본 이미지 표시
         Picasso.get()
                 .load(post.getPostImageUrl())
-                .placeholder(R.drawable.default_image)
-                .error(R.drawable.default_image)
-                .into(holder.postImageView);
-        // 프로필 이미지 로딩, 실패 시 기본 이미지 표시
-        Picasso.get()
-                .load(post.getProfileImageUrl())
-                .placeholder(R.drawable.user)
-                .error(R.drawable.user)
-                .into(holder.profileImageView);
+                .placeholder(R.drawable.none)
+                .error(R.drawable.none)
+                .into(holder.img_iv);
         // 사용자 이름, 제목과 요약 설정
-        holder.userNameView.setText(post.getUserName());
-        holder.titleView.setText(post.getTitle());
-        holder.summaryView.setText(post.getSummary());
+        holder.nickname_tv.setText(post.getUserName());
+        holder.title_tv.setText(post.getTitle());
     }
 
     @Override
@@ -82,18 +75,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         ImageView profileImageView;
-        TextView userNameView;
-        ImageView postImageView;
-        TextView titleView;
-        TextView summaryView;
+        TextView nickname_tv;
+
+        TextView title_tv;
+
+        ImageView img_iv;
 
         public PostViewHolder(View itemView) {
             super(itemView);
-            profileImageView = itemView.findViewById(R.id.userProfileImage); //
-            userNameView = itemView.findViewById(R.id.userName);
-            postImageView = itemView.findViewById(R.id.postTemplateImageView);
-            titleView = itemView.findViewById(R.id.postTitle);
-            summaryView = itemView.findViewById(R.id.postSummary);
+            nickname_tv = itemView.findViewById(R.id.nickname_tv);
+            title_tv = itemView.findViewById(R.id.title_tv);
+            img_iv = itemView.findViewById(R.id.img_iv);
         }
     }
 

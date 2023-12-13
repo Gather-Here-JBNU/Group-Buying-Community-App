@@ -60,6 +60,7 @@ android:background="@drawable/post_preview_template_shape" -> @drawable/border
             android:scaleType="centerCrop"
             android:outlineProvider="background"
             android:clipToOutline="true"
+            android:src="@drawable/none"
             android:background="@drawable/background_radius_16"
             >
 

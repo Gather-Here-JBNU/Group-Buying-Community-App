@@ -1,15 +1,17 @@
 package com.example.cloudcomputingproject.postlist;
 
-public class PostPreview {
+public class PostListPreview {
     private String title;
     private String nickname;
 
     private String post_id;
+    private String img;
 
-    public PostPreview(String title, String nickname, String post_id) {
-        this.title = title;
-        this.nickname= nickname;
+    public PostListPreview(String post_id, String nickname, String title, String img) {
         this.post_id = post_id;
+        this.nickname= nickname;
+        this.title = title;
+        this.img = img;
     }
 
     // Getters and Setters
@@ -21,4 +23,7 @@ public class PostPreview {
 
     public void setPostId(String post_id){this.post_id = post_id;}
     public String getPost_id() {return this.post_id;}
+
+    public void setImg(String img){this.img = img;}
+    public String getImg() { return this.img;}
 }

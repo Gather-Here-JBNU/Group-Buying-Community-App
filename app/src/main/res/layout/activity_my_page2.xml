@@ -13,12 +13,8 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:title="닉네임"
+        app:title="프로필"
         app:titleTextAppearance="@style/ToolbarTitleText" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="15dp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +38,7 @@
         android:layout_height="wrap_content"
         android:gravity="center">
         <TextView
-            android:id="@+id/nickname"
+            android:id="@+id/nickname_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -58,11 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="저는 홍길동입니다. 안전한 거래를 원해요"
-            android:textColor="#80000000"/>
     </LinearLayout>
 
 
@@ -81,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:text="매너온도"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -107,17 +98,15 @@
             android:text="처음 온도 36.5℃"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/temp_label"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="#80000000"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="20dp"
             android:layout_height="17dp"
             android:layout_marginStart="46dp"
             android:layout_marginEnd="46dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="12dp"
             android:text="▼"
-            android:textColor="#80000000"
             app:layout_constraintBottom_toTopOf="@+id/progressBar"
             app:layout_constraintEnd_toEndOf="@+id/init_temp_label"
             app:layout_constraintHorizontal_bias="0.214"
@@ -129,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="-16dp"
+            android:layout_marginBottom="6dp"
             android:text="36.5℃"
             android:textStyle="bold"
             android:textColor="#6096B4"
@@ -141,11 +130,65 @@
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="자기소개"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/selfintro_tv"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="320dp"
+        android:layout_height="150dp"
+        android:gravity="top"
+        android:background="@drawable/plaintext_rounded_corner"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:scrollHorizontally="false"
+        android:hint="사용자 소개 정보가 없습니다."
+        android:textSize="15sp"
+        />
+
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp">
 
+        <TableRow
+            android:id="@+id/favorites_tr"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/favorites_img"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_weight="0.9"
+                android:src="@drawable/like_color" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="10"
+                android:gravity="center_vertical"
+                android:text="관심 목록"
+                android:textColor="@color/black" />
+        </TableRow>
 
         <TableRow
             android:id="@+id/view_post_tr"
@@ -170,7 +213,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="10"
                 android:gravity="center_vertical"
-                android:text="게시물"
+                android:text="작성한 소식"
                 android:textColor="@color/black" />
         </TableRow>
     </TableLayout>

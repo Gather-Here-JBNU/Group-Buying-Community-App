@@ -128,7 +128,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    />
+
 
 
     <TableLayout
@@ -161,7 +161,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="10"
                 android:gravity="center_vertical"
-                android:text="관심목록"
+                android:text="관심 목록"
                 android:textColor="@color/black" />
         </TableRow>
 

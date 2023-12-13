@@ -16,10 +16,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
+public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostViewHolder> {
 
-    private List<PostPreview> postList;
-    public PostAdapter(List<PostPreview> postList) {
+    private List<PostListPreview> postList;
+    public PostListAdapter(List<PostListPreview> postList) {
         this.postList = postList;
     }
 
@@ -33,7 +33,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             public void onClick(View v) {
                 int position = (int) v.getTag();
 
-                PostPreview post = postList.get(position);
+                PostListPreview post = postList.get(position);
 
                 //parent로부터 context가져오기
                 Context context = parent.getContext();
@@ -49,9 +49,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
-        PostPreview post = postList.get(position);
+        PostListPreview post = postList.get(position);
+
 
         holder.itemView.setTag(position);
+
+        // 게시물 이미지 로딩, 실패 시 기본 이미지 표시
+        Picasso.get()
+                .load(post.getImg())
+                .placeholder(R.drawable.none)
+                .error(R.drawable.none)
+                .into(holder.img_iv);
+
         holder.title_tv.setText(post.getTitle());
         holder.nickname_tv.setText(post.getNickname());
         // 사용자 닉네임, post 제목 설정
@@ -68,10 +77,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         TextView title_tv;
 
+        ImageView img_iv;
+
         public PostViewHolder(View itemView) {
             super(itemView);
             nickname_tv = itemView.findViewById(R.id.nickname_tv);
             title_tv = itemView.findViewById(R.id.title_tv);
+            img_iv = itemView.findViewById(R.id.img_iv);
         }
     }
 }

@@ -11,7 +11,7 @@ public class Post{
 
     @SerializedName("title")
     public String title;
-
+    
     @SerializedName("img")
     public String img; // Uri로 변환해서 써야할 수도 있음.
 }
