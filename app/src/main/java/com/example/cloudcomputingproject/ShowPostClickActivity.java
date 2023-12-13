@@ -8,13 +8,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cloudcomputingproject.datas.LikeData;
 import com.example.cloudcomputingproject.datas.LikeDataResponse;
+import com.example.cloudcomputingproject.datas.MainPostDataGet;
+import com.example.cloudcomputingproject.datas.MainPostDataGetResponse;
+import com.example.cloudcomputingproject.datas.Post;
+import com.example.cloudcomputingproject.datas.PostViewGet;
+import com.example.cloudcomputingproject.datas.PostViewGetResponse;
+import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,8 +33,8 @@ public class ShowPostClickActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private boolean isFavorite = false;
-    ImageView like_iv;
-    String post_id, user_id;
+    ImageView like_iv, img_iv;
+    String post_id, title, nickname, info, price, location, user_id;
 
     Intent intent;
 
@@ -45,6 +54,12 @@ public class ShowPostClickActivity extends AppCompatActivity {
         // post_id와 user_id를 통해 likes 테이블의 정보에 접근, 행의 존재 유무에 따라 isFavorite 상태 변경
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
+
+        startGet(new PostViewGet((post_id));
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
+        getSupportActionBar().setTitle(title);
 
         LikeDataControl(new LikeData(user_id, post_id, 0)); // flag 0번으로 select 기능 control
         like_iv.setOnClickListener(new View.OnClickListener() {
@@ -117,4 +132,30 @@ public class ShowPostClickActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void startGet(PostViewGet data) {
+        service.PostViewGet(data).enqueue(new Callback<PostViewGetResponse>() {
+            @Override
+            public void onResponse(Call<PostViewGetResponse> call, Response<PostViewGetResponse> response) {
+                PostViewGetResponse result = response.body();
+
+                if (result.getCode() == 200) {
+                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+
+                    title = result.getTitle();       // 제목 가져오기
+                    nickname = result.getNickname(); // 닉네임 가져오기.
+                    info = result.getNickname(); // 본문 가져오기.
+                    price = result.getNickname(); // 가격 가져오기.
+                    location = result.getNickname(); // 지역 가져오기.
+                    nickname = result.getNickname(); // 닉네임 가져오기.
+                    nickname = result.getNickname(); // 닉네임 가져오기.
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostViewGetResponse> call, Throwable t) {
+
+            }
+        });
 }

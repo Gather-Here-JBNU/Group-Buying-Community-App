@@ -7,6 +7,8 @@ import com.example.cloudcomputingproject.datas.MainPostDataGet;
 import com.example.cloudcomputingproject.datas.MainPostDataGetResponse;
 import com.example.cloudcomputingproject.datas.PostDataPut;
 import com.example.cloudcomputingproject.datas.PostDataPutResponse;
+import com.example.cloudcomputingproject.datas.PostViewGet;
+import com.example.cloudcomputingproject.datas.PostViewGetResponse;
 import com.example.cloudcomputingproject.datas.UserDataGet;
 import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.datas.UserDataInsert;
@@ -41,6 +43,9 @@ public interface APIInterface {
 
     @POST("/category/add")
     Call<CategoryDataResponse> addCategory(@Body CategoryData category);
+
+    @POST("/user/postview/get")
+    Call<PostViewGetResponse> PostViewGet(@Body PostViewGet data);
 
     @POST("/like")
     Call<LikeDataResponse> LikeDataControl(@Body LikeData data);
