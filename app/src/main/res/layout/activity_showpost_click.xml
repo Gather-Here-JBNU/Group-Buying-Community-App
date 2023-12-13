@@ -45,6 +45,7 @@
                 android:src="@drawable/baby" />
 
             <TextView
+                android:id="@+id/nickname_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -60,6 +61,7 @@
         android:layout_height="13dp" />
 
     <ImageView
+        android:id="@+id/img_iv"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:src="@drawable/ex_img" />
@@ -71,13 +73,14 @@
         android:background="@android:color/black" />
 
     <TextView
+        android:id="@+id/contents_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="같이 구매할사람"
+        android:text="본문"
         android:textStyle="bold"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/post_title"/>
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,6 +101,7 @@
 
 
     <TextView
+        android:id="@id/price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="상품 가격: 50000원"
@@ -111,6 +115,7 @@
         android:background="@android:color/black" />
 
     <TextView
+        android:id="@+id/location_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="장소: 전북대학교 기숙사 앞"
@@ -138,10 +143,11 @@
             android:textColor="@android:color/black"
             android:layout_marginRight="10dp"/>
         <Button
+            android:id="@+id/EnterChat_btn"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_button"
-            android:text="연락하기"
+            android:hint="연락하기"
             android:textColor="@android:color/black" />
     </LinearLayout>
 

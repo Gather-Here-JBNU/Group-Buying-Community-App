@@ -82,15 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         u_id = user.getUid();
-                                        Map<String, Object> userMap = new HashMap<>();
-
-                                        userMap.put(FirebaseID.user_id, u_id);
-                                        userMap.put(FirebaseID.email, email);
-                                        userMap.put(FirebaseID.password, pw);
-                                        userMap.put(FirebaseID.nickname, nickname);
-
-                                        //현재 유저의 Uid를 이름으로 한 document 생성. 이게 없으면 사용자 컨텐츠의 이륾과 사용자id이름이 달라 사용하기 힘듬
-                                        mStore.collection(FirebaseID.user).document(user.getUid()).set(userMap, SetOptions.merge());
 
                                         // 파이어베이스 계정 생성 후, 서버 RDS 데이터베이스에 삽입
                                         startInsert(new UserDataInsert(u_id, email, pw, nickname));

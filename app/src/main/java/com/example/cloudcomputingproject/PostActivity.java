@@ -239,7 +239,6 @@ public class PostActivity extends AppCompatActivity {
             postPreviews.add(new PostPreview("프로필 이미지 URL", post.nickname, post.img, post.title));
         }
 
-
         // 어댑터 생성 및 설정
         adapter = new PostAdapter(postPreviews, u_id, email);
         recyclerView.setAdapter(adapter);
