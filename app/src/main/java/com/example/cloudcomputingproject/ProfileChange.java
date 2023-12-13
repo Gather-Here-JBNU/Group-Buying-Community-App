@@ -53,7 +53,6 @@ public class ProfileChange extends AppCompatActivity {
 
         // u_id를 넣어주고, 서버와 통신할 것임.
         startGet(new UserDataGet(u_id));
-
     }
 
     /**
@@ -97,10 +96,6 @@ public class ProfileChange extends AppCompatActivity {
                     tvEmail.setText(email);
                     etNickname.setText(nickname);
                     etInfo.setText(info);
-
-                    Log.d("ProfileChange", "email은 뭐얏아잉 " + email);
-                    Log.d("ProfileChange", "nickname은 뭐얏아잉 " + nickname);
-                    Log.d("ProfileChange", "info은 뭐얏아잉 " + info);
 
                     // 데이터 가져오기 성공했을 때, 이후에 다른 작업 진행하기.
                     // 예를들어, 채팅창에 가져온 email, nickname을 통해 채팅을 띄워주고 싶다면,

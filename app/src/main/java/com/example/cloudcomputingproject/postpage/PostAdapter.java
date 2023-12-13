@@ -40,11 +40,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             Context context = parent.getContext();
             String post_id = post.getPostID();
 
-            //ChatActivity 이동
+            //게시글 액티비티 이동
             Intent in = new Intent(context, ShowPostClickActivity.class);
-            in.putExtra("u_id", u_id);
-            in.putExtra("email", email);
-            in.putExtra("title", post.getTitle());
+           // in.putExtra("u_id", u_id);
+           // in.putExtra("email", email);
+           // in.putExtra("title", post.getTitle());
             in.putExtra("post_id", post_id);
             // PostID도 넘겨주고 intent 시작
             context.startActivity(in);
