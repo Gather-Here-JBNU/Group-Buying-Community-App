@@ -12,7 +12,20 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:title="게시글"
-        app:titleTextAppearance="@style/ToolbarTitleText" />
+        app:titleTextAppearance="@style/ToolbarTitleText" >
+
+        <ImageView
+            android:id="@+id/like_iv"
+            android:layout_gravity="right"
+            android:clickable="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/like"
+            android:onClick="onStarClick" />
+    </androidx.appcompat.widget.Toolbar>
 
 
     <View
@@ -101,7 +114,7 @@
 
 
     <TextView
-        android:id="@id/price_tv"
+        android:id="@+id/price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="상품 가격: 50000원"

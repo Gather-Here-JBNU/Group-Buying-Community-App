@@ -7,12 +7,14 @@ public class PostPreview {
     private String title;
     private String summary;
 
-    public PostPreview(String profileImageUrl, String userName, String postImageUrl, String title) {
+    private String PostID;
 
+    public PostPreview(String profileImageUrl, String userName, String postImageUrl, String title, String PostID) {
         this.profileImageUrl = profileImageUrl;
         this.userName = userName;
         this.postImageUrl = postImageUrl;
         this.title = title;
+        this.PostID = PostID;
     }
 
     // Getters and Setters
@@ -48,4 +50,7 @@ public class PostPreview {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getPostID() { return PostID;}
+    public void setPostID(String PostID) { this.PostID = PostID; }
 }

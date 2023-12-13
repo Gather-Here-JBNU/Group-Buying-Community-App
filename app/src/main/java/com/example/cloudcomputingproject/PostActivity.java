@@ -73,18 +73,6 @@ public class PostActivity extends AppCompatActivity {
         // 임시 데이터 생성
         postPreviews = new ArrayList<>();
         // 여기에 임의의 데이터 추가...
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-        postPreviews.add(new PostPreview("프로필 이미지 URL", "사용자 이름", "게시물 이미지 URL", "게시글 제목"));
-
-
 
         // FloatingActionButton 초기화
         postingButton = findViewById(R.id.postingButton);
@@ -235,8 +223,8 @@ public class PostActivity extends AppCompatActivity {
 
         for (int i = posts.size() - 1; i >= 0; i--) {
             Post post = posts.get(i);
-
-            postPreviews.add(new PostPreview("프로필 이미지 URL", post.nickname, post.img, post.title));
+            postPreviews.add(new PostPreview("프로필 이미지 URL", post.nickname, post.img, post.title, post.post_id));
+            Log.d("post_id는 ", post.post_id);
         }
 
         // 어댑터 생성 및 설정
