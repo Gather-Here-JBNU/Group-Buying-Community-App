@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                                     FirebaseUser cur_user = mAuth.getCurrentUser();
                                     String u_id = cur_user.getUid();
                                     Log.e("LoginActivity에서 u_id는 ", u_id);
-                                    intent.putExtra("u_id", u_id); // 파이어베이스 아이디를 intent에 전송. 이를 통해 aws db에 접근할 것임.
                                     intent.putExtra("email", email);
 
                                     startActivity(intent);

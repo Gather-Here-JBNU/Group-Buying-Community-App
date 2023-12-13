@@ -31,6 +31,7 @@ import com.example.cloudcomputingproject.postpage.PostPreview;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,7 +56,7 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post); // 여러분의 레이아웃 파일 이름으로 변경하세요.
         Intent intent = getIntent();
-        u_id = intent.getStringExtra("u_id"); // 로그인할때 전달해준 u_id를 변수에 저장.
+        u_id = FirebaseAuth.getInstance().getUid(); // 로그인할때 전달해준 u_id를 변수에 저장.
         email = intent.getStringExtra("email"); // 로그인할때 전달해준 email를 변수에 저장.
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
