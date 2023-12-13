@@ -2,8 +2,8 @@ package com.example.cloudcomputingproject;
 
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -22,9 +22,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import androidx.appcompat.widget.Toolbar;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class CategoryActivity extends AppCompatActivity {
+    // UI 요소
     private RecyclerView recyclerView;
     private CategoryAdapter adapter;
     private List<CategoryItem> categoryList;
@@ -38,20 +38,22 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category);
 
-
+        // UI 요소 초기화
         categoryEditText = findViewById(R.id.categoryEditText);
         categoryAddButton = findViewById(R.id.categoryAddButton);
         recyclerView = findViewById(R.id.categoryView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         categoryList = new ArrayList<>();
-        adapter = new CategoryAdapter(categoryList);
+        adapter = new CategoryAdapter(CategoryActivity.this, categoryList);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new CustomItemDecoration(getResources().getDimensionPixelSize(R.dimen.item_decoration_margin)));
         service = RetrofitClient.getClient().create(APIInterface.class);
 
         // Category라는 문자열이 xml코드의 수정을 통해서도 툴바에 안나타나길래 넣은 부분입니다.
         toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.category_title);
         }
@@ -134,6 +136,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void updateCategoryList(List<String> categoryLabels) {
         categoryList.clear();
+        categoryList.add(new CategoryItem("전체 게시글"));
         for (String label : categoryLabels) {
             categoryList.add(new CategoryItem(label));
         }
@@ -158,5 +161,14 @@ public class CategoryActivity extends AppCompatActivity {
                 outRect.top = verticalSpaceHeight;
             }
         }
+    }
+    //나가기 버튼 활성화
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) { // 툴바의 뒤로가기 버튼이 눌렸을 때
+            onBackPressed(); // 현재 액티비티를 종료하고 이전 액티비티로 돌아갑니다.
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
