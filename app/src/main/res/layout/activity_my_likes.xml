@@ -5,22 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#EEEEEE"
-    tools:context=".ViewCommentActivity">
-
+    tools:context=".MyLikesActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EEEEEE"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:title="나의 리뷰"
+        app:title="관심목록"
         app:titleTextAppearance="@style/ToolbarTitleText" />
-
     <View
         android:background="#D3D3D3"
         android:layout_width="match_parent"
         android:layout_height="2px" />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/likes_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"/>
 </LinearLayout>

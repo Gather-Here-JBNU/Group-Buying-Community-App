@@ -3,6 +3,8 @@ package com.example.cloudcomputingproject.utility;
 import com.example.cloudcomputingproject.datas.CategoryDataResponse;
 import com.example.cloudcomputingproject.datas.LikeData;
 import com.example.cloudcomputingproject.datas.LikeDataResponse;
+import com.example.cloudcomputingproject.datas.LikePostData;
+import com.example.cloudcomputingproject.datas.LikePostDataReponse;
 import com.example.cloudcomputingproject.datas.MainPostDataGet;
 import com.example.cloudcomputingproject.datas.MainPostDataGetResponse;
 import com.example.cloudcomputingproject.datas.PostDataPut;
@@ -49,4 +51,7 @@ public interface APIInterface {
 
     @POST("/like")
     Call<LikeDataResponse> LikeDataControl(@Body LikeData data);
+
+    @POST("/like/post")
+    Call<LikePostDataReponse> LikePostData(@Body LikePostData data);
 }

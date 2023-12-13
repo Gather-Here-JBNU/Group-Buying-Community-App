@@ -5,6 +5,7 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -24,139 +25,177 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/like" />
+
+
     </androidx.appcompat.widget.Toolbar>
 
-
     <View
+        android:background="#80D3D3D3"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha="0.3"
-        android:background="@android:color/black" />
-
-    <View
+        android:layout_height="3px" />
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="13dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp">
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/baby" />
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/user" />
+
+                    <TextView
+                        android:id="@+id/nickname_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="닉네임"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:background="#80D3D3D3"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="3px" />
+
+            <ImageView
+                android:id="@+id/img_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/imgLine_view"
+                android:layout_marginTop="10dp"
+                android:background="#80D3D3D3"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                android:layout_height="3px" />
 
             <TextView
-                android:id="@+id/nickname_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="김제현"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:text="본문"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contents_tv"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:minLines="7"
+                android:maxLines="30"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/plaintext_rounded_corner"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="작성된 본문 정보가 없습니다."
+                android:inputType="textMultiLine"
+                android:padding="15dp"
+                android:scrollHorizontally="false"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <View
+        android:background="#80D3D3D3"
+        android:layout_width="match_parent"
+        android:layout_height="3px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/categoryAddButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:contentDescription="Add category"
+            android:scaleType="centerInside"
+            android:src="@drawable/mainimagesmall" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/price_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:hint="가격 정보가 없습니다."
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/location_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="위치 정보가 없습니다."
+                android:textColor="@color/black"
+                android:textSize="14sp" />
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="13dp" />
-
-    <ImageView
-        android:id="@+id/img_iv"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:src="@drawable/ex_img" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha="0.3"
-        android:background="@android:color/black" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="본문"
-        android:textStyle="bold"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:id="@+id/contents_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:maxLines="10"
-        android:minLines="4"
-        android:padding="15dp"
-        android:scrollbars="vertical"
-        android:text="위 상품을 같이 구매하고 싶습니다."
-        android:textSize="13sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha="0.3"
-        android:background="@android:color/black" />
-
-
-    <TextView
-        android:id="@+id/price_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="상품 가격: 50000원"
-        android:paddingVertical="13dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="12sp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha="0.3"
-        android:background="@android:color/black" />
-
-    <TextView
-        android:id="@+id/location_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="장소: 전북대학교 기숙사 앞"
-        android:paddingVertical="13dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="12sp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha="0.3"
-        android:background="@android:color/black" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="70dp" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
         <Button
             android:id="@+id/EnterChat_btn"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_button"
             android:text="채팅하기"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
-
-
-
 
 </LinearLayout>

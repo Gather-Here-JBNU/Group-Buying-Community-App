@@ -59,7 +59,7 @@
             android:exported="false"
             android:parentActivityName=".PostActivity" />
         <activity
-            android:name=".MyFavoritesActivity"
+            android:name=".MyLikesActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileChange"

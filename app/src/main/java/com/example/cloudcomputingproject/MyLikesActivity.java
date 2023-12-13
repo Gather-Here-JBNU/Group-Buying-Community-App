@@ -5,13 +5,13 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class ViewCommentActivity extends AppCompatActivity {
+public class MyLikesActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_comment);
+        setContentView(R.layout.activity_my_likes);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

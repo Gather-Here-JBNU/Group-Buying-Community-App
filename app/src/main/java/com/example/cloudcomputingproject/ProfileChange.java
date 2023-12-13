@@ -150,5 +150,10 @@ public class ProfileChange extends AppCompatActivity {
         });
 
     }
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ProfileChange.this, Mypage.class);
+        startActivity(intent);
+        finish();
+    }
 }

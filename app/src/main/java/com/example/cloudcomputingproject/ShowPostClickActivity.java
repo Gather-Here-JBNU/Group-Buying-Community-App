@@ -37,6 +37,8 @@ public class ShowPostClickActivity extends AppCompatActivity {
     String post_id, title, nickname, info, price, location, user_id, email,
             cur_nickname, img, contents;
 
+    View imgLine_view;
+
     TextView nickname_tv, contents_tv, price_tv, location_tv;
 
     Intent intent;
@@ -56,7 +58,7 @@ public class ShowPostClickActivity extends AppCompatActivity {
         contents_tv = findViewById(R.id.contents_tv);
         price_tv = findViewById(R.id.price_tv);
         location_tv = findViewById(R.id.location_tv);
-
+        imgLine_view = findViewById(R.id.imgLine_view);
 
         intent = getIntent();
         post_id = intent.getStringExtra("post_id");
@@ -175,13 +177,17 @@ public class ShowPostClickActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle(title);
                     nickname_tv.setText(nickname);
                     contents_tv.setText(contents);
-                    price_tv.setText("가격 : "+price);
-                    location_tv.setText("장소 : "+location);
+                    price_tv.setText(price);
+                    location_tv.setText(location);
                     Picasso.get()
                             .load(img)
                             .into(img_iv);
 
-
+                    if(img == null){
+                        imgLine_view.setVisibility(View.GONE);
+                    } else{
+                        imgLine_view.setVisibility(View.VISIBLE);
+                    }
 
                 }
             }

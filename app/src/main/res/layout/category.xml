@@ -2,15 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#EEEEEE">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:background="#EEEEEE"
         android:theme="?attr/actionBarTheme"
         android:title="@string/category_title"
         android:titleTextAppearance="@style/ToolbarTitleText"/>
@@ -20,8 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:elevation="0dp"
-        android:background="#EEEEEE"/>
+        android:elevation="0dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

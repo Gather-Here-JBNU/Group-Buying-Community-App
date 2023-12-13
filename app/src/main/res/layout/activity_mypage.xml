@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#EEEEEE"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,7 +11,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EEEEEE"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:title="마이페이지"
@@ -38,7 +36,7 @@
             android:src="@drawable/user" />
 
         <TextView
-            android:id="@+id/nickname"
+            android:id="@+id/nickname_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
@@ -136,17 +134,19 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp">
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TableRow
             android:id="@+id/favorites_tr"
             android:layout_width="match_parent"
             android:layout_height="18dp"
             android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
             <ImageView
                 android:id="@+id/favorites_img"
@@ -169,11 +169,11 @@
             android:id="@+id/view_post_tr"
             android:layout_width="match_parent"
             android:layout_height="18dp"
-            android:clickable="true"
-            android:paddingTop="10dp"
             android:layout_marginTop="10dp"
-            android:paddingBottom="10dp"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
             <ImageView
                 android:id="@+id/wrote_img"
@@ -193,41 +193,14 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/view_comment_tr"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
-            android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/comment_img"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/comment" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="10"
-                android:gravity="center_vertical"
-                android:text="나의 리뷰"
-                android:textColor="@color/black" />
-        </TableRow>
-
-        <TableRow
             android:id="@+id/logout_tr"
             android:layout_width="match_parent"
             android:layout_height="18dp"
             android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
             <ImageView
                 android:id="@+id/logout_img"
