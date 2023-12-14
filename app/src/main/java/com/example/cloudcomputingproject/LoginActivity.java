@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -38,12 +40,23 @@ public class LoginActivity extends AppCompatActivity {
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
 
+        pw_et = findViewById(R.id.pw_et);
+        // 비밀번호 누르고 엔터를 누르면 로그인 버튼 클릭
+        pw_et.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)){
+                login_btn.performClick();
+                return true;
+            }
+            return false;
+        });
+
+
         login_btn.setOnClickListener(v -> {
             email_et = findViewById(R.id.email_et);
-            pw_et = findViewById(R.id.pw_et);
 
             email = email_et.getText().toString();
             pw = pw_et.getText().toString();
+
 
             mAuth.signInWithEmailAndPassword(email, pw)
                     .addOnCompleteListener(LoginActivity.this, task -> {
