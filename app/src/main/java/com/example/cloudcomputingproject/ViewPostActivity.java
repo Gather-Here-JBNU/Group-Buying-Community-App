@@ -62,7 +62,7 @@ public class ViewPostActivity extends AppCompatActivity {
 
         intent = getIntent();
         String other_user_id = intent.getStringExtra("user_id");
-        String new_title = "작성한 소식";
+        String new_title = "작성한 게시글";
         if(other_user_id!=null){
             user_id = other_user_id; // 만약, 다른 사용자가 넘겨준 intent가 감지되었다면, 이 user_id로 접근할 것임.
 

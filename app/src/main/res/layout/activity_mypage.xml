@@ -188,7 +188,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="10"
                 android:gravity="center_vertical"
-                android:text="내가 작성한 소식"
+                android:text="내가 작성한 게시글"
                 android:textColor="@color/black" />
         </TableRow>
 
