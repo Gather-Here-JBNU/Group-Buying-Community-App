@@ -58,11 +58,6 @@ public class Chat {
     public String getTime(){
         return time;
     }
-
-    public void setTime(String time){
-        this.time = time;
-    }
-
     public String getUserId() {return user_id;}
     public void setUserId(String user_id){this.user_id =user_id;}
 }

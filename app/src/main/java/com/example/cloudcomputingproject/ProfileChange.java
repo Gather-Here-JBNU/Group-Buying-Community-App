@@ -88,7 +88,7 @@ public class ProfileChange extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
 
                     email = result.getEmail();       // 이메일 가져오기
                     nickname = result.getNickname(); // 닉네임 가져오기.
@@ -126,7 +126,7 @@ public class ProfileChange extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
                     Log.d("ProfileChange", "nickname 업데이트 " + result.getNickname());
                     Log.d("ProfileChange", "info 업데이트 " + result.getInfo());
                     //tvEmail.setText(result.getEmail());       // 이메일 가져오기

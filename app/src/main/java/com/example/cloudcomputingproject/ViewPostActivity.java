@@ -69,12 +69,7 @@ public class ViewPostActivity extends AppCompatActivity {
             toolbar.setTitle(new_title);
         }
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         String flag = "mypost";
         startGet(new LikePostData(user_id, flag));
@@ -88,7 +83,7 @@ public class ViewPostActivity extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
 
                     List<PostItem> posts = result.getPosts();
 
@@ -135,8 +130,6 @@ public class ViewPostActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // CustomItemDecoration을 추가합니다.
-        //int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_decoration_margin);
-        //recyclerView.addItemDecoration(new PostActivity.CustomItemDecoration(spacingInPixels));
     }
 
 }

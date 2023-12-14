@@ -57,30 +57,21 @@ public class MyPage2 extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 왼쪽에, 뒤로가기 버튼 추가.
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
-        view_post_tr.setOnClickListener(new View.OnClickListener() { // 작성한 소식 클릭시, 액티비티 이동
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MyPage2.this, ViewPostActivity.class);
-                intent.putExtra("user_id", user_id);
-                startActivity(intent);
-            }
+        // 작성한 소식 클릭시, 액티비티 이동
+        view_post_tr.setOnClickListener(v -> {
+            Intent intent = new Intent(MyPage2.this, ViewPostActivity.class);
+            intent.putExtra("user_id", user_id);
+            startActivity(intent);
         });
 
 
-        favorites_tr.setOnClickListener(new View.OnClickListener() { //  관심목록 클릭시, 액티비티 이동
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MyPage2.this, MyLikesActivity.class);
-                intent.putExtra("user_id", user_id);
-                startActivity(intent);
-            }
+        //  관심목록 클릭시, 액티비티 이동
+        favorites_tr.setOnClickListener(v -> {
+            Intent intent = new Intent(MyPage2.this, MyLikesActivity.class);
+            intent.putExtra("user_id", user_id);
+            startActivity(intent);
         });
 
         startGet(new UserDataGet(user_id));
@@ -94,7 +85,7 @@ public class MyPage2 extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
                     nickname = result.getNickname(); // 닉네임 가져오기.
                     info = result.getInfo();       // 자기소개 가져오기
 
@@ -117,12 +108,9 @@ public class MyPage2 extends AppCompatActivity {
         ValueAnimator animator = ValueAnimator.ofInt(0, targetProgress);
         animator.setDuration(500); // 애니메이션 기간 (1초로 설정, 필요에 따라 조절)
 
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int progress = (int) animation.getAnimatedValue();
-                progressBar.setProgress(progress);
-            }
+        animator.addUpdateListener(animation -> {
+            int progress = (int) animation.getAnimatedValue();
+            progressBar.setProgress(progress);
         });
 
         animator.start();

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -35,17 +37,16 @@ import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity {
     private static final String TAG = "ChatActivity";
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     ArrayList<Chat> chatArrayList;
     MyAdapter mAdapter;
     FirebaseDatabase database;
     APIInterface service;
-    String u_id, email, nickname, title, emailCheck, time; // u_id
+    String u_id, post_id, email, nickname, title, emailCheck, time; // u_id
 
     Toolbar toolbar;
     Intent intent;
 
+    EditText etText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class ChatActivity extends AppCompatActivity {
         u_id = FirebaseAuth.getInstance().getUid();
         emailCheck = intent.getStringExtra("email"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 email 요소 가져오기.
         title = intent.getStringExtra("title");
+        post_id = intent.getStringExtra("post_id");
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,18 +72,36 @@ public class ChatActivity extends AppCompatActivity {
 
         // UI 구성 요소
         ImageView ivSend = findViewById(R.id.btnSend);
-        EditText etText = findViewById(R.id.etText);
+        etText = findViewById(R.id.etText);
 
         // u_id를 넣어주고, 서버와 통신할 것임.
         startGet(new UserDataGet(u_id));
 
         // 채팅 메시지를 위한 RecyclerView 설정
-        recyclerView = findViewById(R.id.my_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new MyAdapter(chatArrayList, emailCheck);
         recyclerView.setAdapter(mAdapter);
+
+        etText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                handleTextChanges(editable, etText);
+            }
+        });
+
 
         // Firebase Realtime Database의 ChildEventListener 설정
         ChildEventListener childEventListener = new ChildEventListener() {
@@ -91,7 +111,6 @@ public class ChatActivity extends AppCompatActivity {
 
                 // A new comment has been added, add it to the displayed list
                 Chat chat = dataSnapshot.getValue(Chat.class);
-                String commentKey = dataSnapshot.getKey();
                 String stEmail = chat.getEmail();
                 String stText = chat.getText();
                 String stNickname = chat.getNickname();
@@ -139,7 +158,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        DatabaseReference ref = database.getReference(title);
+        DatabaseReference ref = database.getReference(post_id);
         ref.addChildEventListener(childEventListener);
 
         // 메시지 전송을 위한 클릭 리스너
@@ -161,10 +180,28 @@ public class ChatActivity extends AppCompatActivity {
             Log.d(TAG,"email은 \"" + stEmail + "\" text는 \"" + stText + "\" time은 \"" + time + "\" 입니다.");
 
             // Firebase Realtime Database에 데이터 전송
-            DatabaseReference myRef = database.getReference(title).child(datetime);
+            DatabaseReference myRef = database.getReference(post_id).child(datetime);
             myRef.setValue(chat);
             etText.getText().clear();
+
+            // 메시지를 추가한 후 RecyclerView를 맨 아래로 스크롤
+            int itemCount = mAdapter.getItemCount();
+            recyclerView.smoothScrollToPosition(itemCount - 1) ;
         });
+    }
+
+    private void handleTextChanges(Editable editable, EditText etText){
+        int maxLines = 3;
+
+        int lineCount = etText.getLineCount();
+
+        if(lineCount > maxLines){
+            etText.setMaxLines(maxLines);
+            etText.setVerticalScrollBarEnabled(true);
+        } else{
+            etText.setMaxLines(Integer.MAX_VALUE);
+            etText.setVerticalScrollBarEnabled(false);
+        }
     }
 
     // 입력된 데이터와 u_id를 기반으로 서버와 통신하는 메서드
@@ -176,7 +213,7 @@ public class ChatActivity extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
 
                     email = result.getEmail();       // 이메일 가져오기
                     nickname = result.getNickname(); // 닉네임 가져오기.

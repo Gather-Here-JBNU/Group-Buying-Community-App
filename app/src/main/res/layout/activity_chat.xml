@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/btnSend"
+        app:layout_constraintBottom_toTopOf="@+id/etText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,13 +37,14 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@color/cyanBlue"
         android:padding="10dp"
         android:scaleType="centerInside"
         android:src="@drawable/little_send"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_recycler_view"/>
 
     <EditText
         android:id="@+id/etText"
@@ -52,10 +53,11 @@
         android:backgroundTint="@color/white"
         android:paddingHorizontal="10dp"
         android:textColor="@color/black"
+        android:maxLines="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSend"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_recycler_view" />
+        />
 
     <TextView
         android:id="@+id/llTop"

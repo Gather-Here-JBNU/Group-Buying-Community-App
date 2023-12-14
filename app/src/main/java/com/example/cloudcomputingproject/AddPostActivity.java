@@ -20,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,8 +31,6 @@ import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -48,7 +45,7 @@ public class AddPostActivity extends AppCompatActivity {
     TextView toolbarTitle;
     private APIInterface service;
 
-    EditText title_et, contents_et, img_et, price_et, location_et;
+    EditText title_et, contents_et, price_et, location_et;
     String u_id, title, contents, img, category_label, price, location;
     //FrameLayout img_fr;
     ImageView img_iv;
@@ -66,7 +63,7 @@ public class AddPostActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_view);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 
         setSupportActionBar(toolbar);
 
@@ -86,14 +83,11 @@ public class AddPostActivity extends AppCompatActivity {
         // 초기에는 프로그래스바 감추기
         progressBar.setVisibility(View.INVISIBLE);
 
-        img_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/");
-                activityResult.launch(intent);
-            }
+        img_iv.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.setAction(Intent.ACTION_GET_CONTENT);
+            intent1.setType("image/");
+            activityResult.launch(intent1);
         });
 
 
@@ -163,44 +157,28 @@ public class AddPostActivity extends AppCompatActivity {
 
         StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri.toString()));
 
-        fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> fileRef.getDownloadUrl().
+                addOnSuccessListener(uri1 -> {
+                    // 나중에 접근 가능한 uri를 db에 넣자!
+                    Log.d("이미지 파일 업로드 성공 !!", uri1.toString());
 
-                fileRef.getDownloadUrl().
-                        addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // 나중에 접근 가능한 uri를 db에 넣자!
-                        Log.d("이미지 파일 업로드 성공 !!", uri.toString());
+                    img = uri1.toString();
 
-                        img = uri.toString();
+                    // uri를 img에 string으로 저장
+                    startInsert(new PostDataPut(u_id, title, contents, uri1.toString(), category_label, price, location));
+                    // 이후, uri를 포함하여 db에 insert
+                    //프로그래스바 숨김
+                    progressBar.setVisibility(View.GONE);
 
-                        // uri를 img에 string으로 저장
-                        startInsert(new PostDataPut(u_id, title, contents, uri.toString(), category_label, price, location));
-                        // 이후, uri를 포함하여 db에 insert
-                        //프로그래스바 숨김
-                        progressBar.setVisibility(View.GONE);
-
-                        Toast.makeText(AddPostActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(AddPostActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
+                })).addOnProgressListener(snapshot -> {
+                    //프로그래스바 보여주기
+                    progressBar.setVisibility(View.VISIBLE);
+                }).addOnFailureListener(e -> {
+                    //프로그래스바 숨김
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(AddPostActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
                 });
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                //프로그래스바 보여주기
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                //프로그래스바 숨김
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(AddPostActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void startInsert(PostDataPut data) {
@@ -208,11 +186,8 @@ public class AddPostActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PostDataPutResponse> call, Response<PostDataPutResponse> response) {
                 PostDataPutResponse result = response.body();
-                if(response == null){
-                    Log.e("", String.valueOf("response는 null"));
-                }
                 if(result == null){
-                    Log.e("", String.valueOf("result는 null"));
+                    Log.e("", "result는 null");
                 }
                 Toast.makeText(AddPostActivity.this, "onResponse 안입니다.", Toast.LENGTH_SHORT).show();
             }

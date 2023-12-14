@@ -10,11 +10,10 @@
         android:layout_height="25dp"
         android:background="@drawable/user"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvChat"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="parent" _toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNickname"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +21,7 @@
         android:hint="이름"
         android:textSize="10sp"
         android:textColor="@color/black"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toEndOf="@id/ivProfile"
         app:layout_constraintBottom_toTopOf="@+id/tvChat"/>
     <TextView
@@ -31,8 +31,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/textbox_rounded"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="5dp"
+        android:maxWidth="200dp"
+        android:padding="5dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivProfile"

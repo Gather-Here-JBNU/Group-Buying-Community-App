@@ -1,13 +1,13 @@
 package com.example.cloudcomputingproject;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,18 +17,8 @@ import com.example.cloudcomputingproject.datas.UserDataInsert;
 import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import com.example.cloudcomputingproject.utility.FirebaseID;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,9 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
     LinearLayout login_move_layout;
     Toolbar toolbar;
 
-    EditText email_et, pw_et, nickname_et;
-    String email, pw, nickname, u_id;
-    private FirebaseFirestore mStore;
+    EditText email_et, pw_et, nickname_et, pwCheck_et;
+    String email, pw, nickname, u_id, pwCheck;
     private FirebaseAuth mAuth;
     private APIInterface service;
 
@@ -55,64 +44,76 @@ public class RegisterActivity extends AppCompatActivity {
         login_move_layout = findViewById(R.id.login_move_layout);
         toolbar = findViewById(R.id.toolbar);
 
-         mStore = FirebaseFirestore.getInstance(); // 파이어베이스 스토어
-         mAuth = FirebaseAuth.getInstance(); // 파이어베이스 인스턴스 설정
+        // 파이어베이스 스토어
+        mAuth = FirebaseAuth.getInstance(); // 파이어베이스 인스턴스 설정
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
-        register_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Toast.makeText(RegisterActivity.this, "click", Toast.LENGTH_SHORT).show(); // 회원가입 버튼 눌렀을 때 동작. 잠시 toast로 대체
 
-                email_et = findViewById(R.id.email_et);
-                pw_et = findViewById(R.id.pw_et);
-                nickname_et = findViewById(R.id.nickname_et);
+        nickname_et = findViewById(R.id.nickname_et);
+        // 비밀번호 누르고 엔터를 누르면 로그인 버튼 클릭
+        nickname_et.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)){
+                register_btn.performClick();
+                return true;
+            }
+            return false;
+        });
 
-                email = email_et.getText().toString();
-                pw = pw_et.getText().toString();
-                nickname = nickname_et.getText().toString();
 
-                if ((email != null) && !email.isEmpty() && (pw != null) && !pw.isEmpty() && (nickname != null) && !nickname.isEmpty()) {
+        register_btn.setOnClickListener(v -> {
+            // Toast.makeText(RegisterActivity.this, "click", Toast.LENGTH_SHORT).show(); // 회원가입 버튼 눌렀을 때 동작. 잠시 toast로 대체
+
+            email_et = findViewById(R.id.email_et);
+            pw_et = findViewById(R.id.pw_et);
+            pwCheck_et = findViewById(R.id.pwCheck_et);
+
+            nickname = nickname_et.getText().toString();
+            email = email_et.getText().toString();
+            pw = pw_et.getText().toString();
+            pwCheck = pwCheck_et.getText().toString();
+
+            if (email != null && !email.isEmpty() && pw != null && !pw.isEmpty() && !nickname.isEmpty()) {
+                if (pw.equals(pwCheck)) {
                     mAuth.createUserWithEmailAndPassword(email, pw)
-                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                            .addOnCompleteListener(RegisterActivity.this, task -> {
 
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        u_id = user.getUid();
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    u_id = user.getUid();
 
-                                        // 파이어베이스 계정 생성 후, 서버 RDS 데이터베이스에 삽입
-                                        startInsert(new UserDataInsert(u_id, email, pw, nickname));
+                                    // 파이어베이스 계정 생성 후, 서버 RDS 데이터베이스에 삽입
+                                    startInsert(new UserDataInsert(u_id, email, pw, nickname));
 
-                                       //Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                        //startActivity(intent);
-                                        Log.e("파이어베이스 이후", String.valueOf("12"));
-                                        // finish();
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    Log.e("파이어베이스 이후", "12");
+                                    Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                                    // finish();
 
+                                } else {
+                                    Exception exception = task.getException();
+                                    if (exception != null) {
+                                        Toast.makeText(RegisterActivity.this, "회원가입 실패: " + exception.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Exception exception = task.getException();
-                                        if (exception != null) {
-                                            Toast.makeText(RegisterActivity.this, "회원가입 실패: " + exception.getMessage(),
-                                                    Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
-                                        }
+                                        Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
+                } else {
+                    Toast.makeText(RegisterActivity.this, "비밀번호와 비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
+            }else{
+                Toast.makeText(RegisterActivity.this, "입력을 제대로 해주세요.", Toast.LENGTH_SHORT).show();
             }
-    });
+        });
 
-        login_move_layout.setOnClickListener(new View.OnClickListener(){
-        public void onClick(View v){
+        login_move_layout.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             // 회원가입 액티비티에서, 로그인 액티비티로 전환.
             startActivity(intent);
-        }
-    });
+        });
 
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false); // 타이틀 제거
@@ -123,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
     }
     
@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                 UserDataInsertResponse result = response.body();
 
                 if (result.getCode() == 200) {
-                    Log.e("회원가입 성공. mysql 삽입", String.valueOf("12"));
+                    Log.e("회원가입 성공. mysql 삽입", "12");
                     //finish();
                 }
             }

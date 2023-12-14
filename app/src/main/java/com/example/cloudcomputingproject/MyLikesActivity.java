@@ -6,34 +6,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cloudcomputingproject.datas.LikeDataResponse;
 import com.example.cloudcomputingproject.datas.LikePostData;
 import com.example.cloudcomputingproject.datas.LikePostDataReponse;
-import com.example.cloudcomputingproject.datas.Post;
 import com.example.cloudcomputingproject.datas.PostItem;
-import com.example.cloudcomputingproject.datas.UserDataGet;
-import com.example.cloudcomputingproject.datas.UserDataGetResponse;
 import com.example.cloudcomputingproject.postlist.PostListAdapter;
 import com.example.cloudcomputingproject.postlist.PostListPreview;
-import com.example.cloudcomputingproject.postpage.PostAdapter;
-import com.example.cloudcomputingproject.postpage.PostPreview;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +90,7 @@ public class MyLikesActivity extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
 
                     List<PostItem> posts = result.getPosts();
 
@@ -151,7 +137,5 @@ public class MyLikesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // CustomItemDecoration을 추가합니다.
-        //int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.item_decoration_margin);
-        //recyclerView.addItemDecoration(new PostActivity.CustomItemDecoration(spacingInPixels));
     }
 }
