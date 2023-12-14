@@ -183,6 +183,10 @@ public class ChatActivity extends AppCompatActivity {
             DatabaseReference myRef = database.getReference(post_id).child(datetime);
             myRef.setValue(chat);
             etText.getText().clear();
+
+            // 메시지를 추가한 후 RecyclerView를 맨 아래로 스크롤
+            int itemCount = mAdapter.getItemCount();
+            recyclerView.smoothScrollToPosition(itemCount - 1) ;
         });
     }
 
