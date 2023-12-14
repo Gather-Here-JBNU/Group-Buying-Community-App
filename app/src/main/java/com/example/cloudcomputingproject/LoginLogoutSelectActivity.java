@@ -17,17 +17,13 @@ public class LoginLogoutSelectActivity extends AppCompatActivity {
         login_btn = findViewById(R.id.login_btn);
         register_btn = findViewById(R.id.register_btn);
 
-        login_btn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            }
+        login_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
         });
-        register_btn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-            }
+        register_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(intent);
         });
     }
 }

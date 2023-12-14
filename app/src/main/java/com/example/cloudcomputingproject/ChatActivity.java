@@ -35,8 +35,6 @@ import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity {
     private static final String TAG = "ChatActivity";
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     ArrayList<Chat> chatArrayList;
     MyAdapter mAdapter;
     FirebaseDatabase database;
@@ -76,9 +74,9 @@ public class ChatActivity extends AppCompatActivity {
         startGet(new UserDataGet(u_id));
 
         // 채팅 메시지를 위한 RecyclerView 설정
-        recyclerView = findViewById(R.id.my_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new MyAdapter(chatArrayList, emailCheck);
         recyclerView.setAdapter(mAdapter);
@@ -91,7 +89,6 @@ public class ChatActivity extends AppCompatActivity {
 
                 // A new comment has been added, add it to the displayed list
                 Chat chat = dataSnapshot.getValue(Chat.class);
-                String commentKey = dataSnapshot.getKey();
                 String stEmail = chat.getEmail();
                 String stText = chat.getText();
                 String stNickname = chat.getNickname();
@@ -176,7 +173,7 @@ public class ChatActivity extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
 
                     email = result.getEmail();       // 이메일 가져오기
                     nickname = result.getNickname(); // 닉네임 가져오기.

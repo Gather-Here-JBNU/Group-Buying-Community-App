@@ -1,6 +1,5 @@
 package com.example.cloudcomputingproject;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,18 +16,10 @@ import com.example.cloudcomputingproject.datas.UserDataInsert;
 import com.example.cloudcomputingproject.datas.UserDataInsertResponse;
 import com.example.cloudcomputingproject.utility.APIInterface;
 import com.example.cloudcomputingproject.utility.RetrofitClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.example.cloudcomputingproject.utility.FirebaseID;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,33 +63,30 @@ public class RegisterActivity extends AppCompatActivity {
                 pw = pw_et.getText().toString();
                 nickname = nickname_et.getText().toString();
 
-                if ((email != null) && !email.isEmpty() && (pw != null) && !pw.isEmpty() && (nickname != null) && !nickname.isEmpty()) {
+                if (email != null && !email.isEmpty() && pw != null && !pw.isEmpty() &&  !nickname.isEmpty()) {
                     mAuth.createUserWithEmailAndPassword(email, pw)
-                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                            .addOnCompleteListener(RegisterActivity.this, task -> {
 
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        u_id = user.getUid();
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    u_id = user.getUid();
 
-                                        // 파이어베이스 계정 생성 후, 서버 RDS 데이터베이스에 삽입
-                                        startInsert(new UserDataInsert(u_id, email, pw, nickname));
+                                    // 파이어베이스 계정 생성 후, 서버 RDS 데이터베이스에 삽입
+                                    startInsert(new UserDataInsert(u_id, email, pw, nickname));
 
-                                       //Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                        //startActivity(intent);
-                                        Log.e("파이어베이스 이후", String.valueOf("12"));
-                                        // finish();
+                                   //Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    //startActivity(intent);
+                                    Log.e("파이어베이스 이후", "12");
+                                    // finish();
 
+                                } else {
+                                    Exception exception = task.getException();
+                                    if (exception != null) {
+                                        Toast.makeText(RegisterActivity.this, "회원가입 실패: " + exception.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Exception exception = task.getException();
-                                        if (exception != null) {
-                                            Toast.makeText(RegisterActivity.this, "회원가입 실패: " + exception.getMessage(),
-                                                    Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
-                                        }
+                                        Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -106,13 +94,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
     });
 
-        login_move_layout.setOnClickListener(new View.OnClickListener(){
-        public void onClick(View v){
+        login_move_layout.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             // 회원가입 액티비티에서, 로그인 액티비티로 전환.
             startActivity(intent);
-        }
-    });
+        });
 
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false); // 타이틀 제거
@@ -123,7 +109,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
     }
     
@@ -134,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
                 UserDataInsertResponse result = response.body();
 
                 if (result.getCode() == 200) {
-                    Log.e("회원가입 성공. mysql 삽입", String.valueOf("12"));
+                    Log.e("회원가입 성공. mysql 삽입", "12");
                     //finish();
                 }
             }

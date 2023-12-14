@@ -1,6 +1,5 @@
 package com.example.cloudcomputingproject;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -8,15 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,10 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     Button login_btn;
     LinearLayout register_move_layout;
     Toolbar toolbar;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private SharedPreferences appData;
-    private String id;
-    private boolean saveLoginData;
     EditText email_et, pw_et;
     String email, pw;
 
@@ -45,42 +38,34 @@ public class LoginActivity extends AppCompatActivity {
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email_et = findViewById(R.id.email_et);
-                pw_et = findViewById(R.id.pw_et);
+        login_btn.setOnClickListener(v -> {
+            email_et = findViewById(R.id.email_et);
+            pw_et = findViewById(R.id.pw_et);
 
-                email = email_et.getText().toString();
-                pw = pw_et.getText().toString();
+            email = email_et.getText().toString();
+            pw = pw_et.getText().toString();
 
-                mAuth.signInWithEmailAndPassword(email, pw)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {//성공했을때
-                                    Intent intent = new Intent(LoginActivity.this, PostActivity.class);
-                                    FirebaseUser cur_user = mAuth.getCurrentUser();
-                                    String u_id = cur_user.getUid();
-                                    Log.e("LoginActivity에서 u_id는 ", u_id);
-                                    intent.putExtra("email", email);
+            mAuth.signInWithEmailAndPassword(email, pw)
+                    .addOnCompleteListener(LoginActivity.this, task -> {
+                        if (task.isSuccessful()) {//성공했을때
+                            Intent intent = new Intent(LoginActivity.this, PostActivity.class);
+                            FirebaseUser cur_user = mAuth.getCurrentUser();
+                            String u_id = cur_user.getUid();
+                            Log.e("LoginActivity에서 u_id는 ", u_id);
+                            intent.putExtra("email", email);
 
-                                    startActivity(intent);
-                                } else {//실패했을때
-                                    Toast.makeText(LoginActivity.this, "로그인 오류", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                save();
-            }
+                            startActivity(intent);
+                        } else {//실패했을때
+                            Toast.makeText(LoginActivity.this, "로그인 오류", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            save();
         });
 
-        register_move_layout.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                // 로그인 액티비티에서, 회원가입 액티비티로 전환.
-                startActivity(intent);
-            }
+        register_move_layout.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            // 로그인 액티비티에서, 회원가입 액티비티로 전환.
+            startActivity(intent);
         });
 
         setSupportActionBar(toolbar);
@@ -105,7 +90,5 @@ public class LoginActivity extends AppCompatActivity {
     private void load() {
         // SharedPreferences 객체.get타입( 저장된 이름, 기본값 )
         // 저장된 이름이 존재하지 않을 시 기본값
-        saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
-        id = appData.getString("ID", "");
     }
 }

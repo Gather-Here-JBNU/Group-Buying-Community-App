@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private static ArrayList<Chat> mDataset;
-    String stMyEmail = "";
+    String stMyEmail;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -33,19 +33,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             time = v.findViewById(R.id.tvTime);
             profile = v.findViewById(R.id.ivProfile);
 
-            profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    Context context = textView.getContext();
-                    Intent in = new Intent(context, MyPage2.class);
-                    in.putExtra("user_id", mDataset.get(position).getUserId());
+            profile.setOnClickListener(v1 -> {
+                int position = getAdapterPosition();
+                Context context = textView.getContext();
+                Intent in = new Intent(context, MyPage2.class);
+                in.putExtra("user_id", mDataset.get(position).getUserId());
 
-                    if(position != RecyclerView.NO_POSITION){
-                        String userEmail = mDataset.get(position).getEmail();
-                        in.putExtra("email",userEmail);
-                        context.startActivity(in);
-                    }
+                if(position != RecyclerView.NO_POSITION){
+                    String userEmail = mDataset.get(position).getEmail();
+                    in.putExtra("email",userEmail);
+                    context.startActivity(in);
                 }
             });
         }
@@ -82,8 +79,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.text_view_right, parent, false);
         }
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        return new MyViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)

@@ -35,13 +35,9 @@ import retrofit2.Response;
 public class PostActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private PostAdapter adapter;
     private List<PostPreview> postPreviews;
-    private FloatingActionButton postingButton;
     String u_id, email, category;
     private APIInterface service;
-    List<String> category_label;
-    List<String> categories = new ArrayList<>();
     ImageView category_iv, profile_iv;
     Intent intent;
     Toolbar toolbar;
@@ -81,31 +77,22 @@ public class PostActivity extends AppCompatActivity {
         category_iv = findViewById(R.id.category_iv);
         profile_iv = findViewById(R.id.profile_iv);
         // FloatingActionButton 초기화
-        postingButton = findViewById(R.id.postingButton);
-        postingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 게시글 작성 페이지로 넘어가는 Intent 생성
-                Intent intent = new Intent(PostActivity.this, AddPostActivity.class);
-                intent.putExtra("u_id", u_id);
-                intent.putExtra("category", category);
-                startActivity(intent);
-            }
+        FloatingActionButton postingButton = findViewById(R.id.postingButton);
+        postingButton.setOnClickListener(view -> {
+            // 게시글 작성 페이지로 넘어가는 Intent 생성
+            Intent intent = new Intent(PostActivity.this, AddPostActivity.class);
+            intent.putExtra("u_id", u_id);
+            intent.putExtra("category", category);
+            startActivity(intent);
         });
 
-        category_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
-                startActivity(intent);
-            }
+        category_iv.setOnClickListener(v -> {
+            Intent intent = new Intent(PostActivity.this, CategoryActivity.class);
+            startActivity(intent);
         });
-        profile_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PostActivity.this, Mypage.class);
-                startActivity(intent);
-            }
+        profile_iv.setOnClickListener(v -> {
+            Intent intent = new Intent(PostActivity.this, Mypage.class);
+            startActivity(intent);
         });
     }
 
@@ -162,7 +149,7 @@ public class PostActivity extends AppCompatActivity {
         }
 
         // 어댑터 생성 및 설정
-        adapter = new PostAdapter(postPreviews, u_id, email);
+        PostAdapter adapter = new PostAdapter(postPreviews, u_id, email);
         recyclerView.setAdapter(adapter);
 
         // CustomItemDecoration을 추가합니다.
