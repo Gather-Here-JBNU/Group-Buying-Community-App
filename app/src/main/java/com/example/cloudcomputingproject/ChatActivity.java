@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -44,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     Toolbar toolbar;
     Intent intent;
 
+    EditText etText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +72,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // UI 구성 요소
         ImageView ivSend = findViewById(R.id.btnSend);
-        EditText etText = findViewById(R.id.etText);
+        etText = findViewById(R.id.etText);
 
         // u_id를 넣어주고, 서버와 통신할 것임.
         startGet(new UserDataGet(u_id));
@@ -81,6 +84,24 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new MyAdapter(chatArrayList, emailCheck);
         recyclerView.setAdapter(mAdapter);
+
+        etText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                handleTextChanges(editable, etText);
+            }
+        });
+
 
         // Firebase Realtime Database의 ChildEventListener 설정
         ChildEventListener childEventListener = new ChildEventListener() {
@@ -163,6 +184,20 @@ public class ChatActivity extends AppCompatActivity {
             myRef.setValue(chat);
             etText.getText().clear();
         });
+    }
+
+    private void handleTextChanges(Editable editable, EditText etText){
+        int maxLines = 3;
+
+        int lineCount = etText.getLineCount();
+
+        if(lineCount > maxLines){
+            etText.setMaxLines(maxLines);
+            etText.setVerticalScrollBarEnabled(true);
+        } else{
+            etText.setMaxLines(Integer.MAX_VALUE);
+            etText.setVerticalScrollBarEnabled(false);
+        }
     }
 
     // 입력된 데이터와 u_id를 기반으로 서버와 통신하는 메서드
