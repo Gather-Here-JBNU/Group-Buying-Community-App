@@ -35,4 +35,5 @@ public class UserDataGetResponse {
     public String getMessage(){
         return message;
     }
+
 }

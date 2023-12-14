@@ -38,7 +38,7 @@ public class Mypage extends AppCompatActivity {
 
         intent = getIntent();
         user_id = FirebaseAuth.getInstance().getUid();
-
+        Log.d("user_id는 : ", user_id);
         progressBar = findViewById(R.id.progressBar);
         animateProgressBar(36); // 원하는 프로그래스 값으로 애니메이션 실행
 
