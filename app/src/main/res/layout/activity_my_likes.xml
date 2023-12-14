@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:title="관심목록"
+        app:title="관심 목록"
         app:titleTextAppearance="@style/ToolbarTitleText" />
     <View
         android:background="#D3D3D3"

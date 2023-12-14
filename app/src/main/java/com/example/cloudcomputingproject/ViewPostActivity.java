@@ -3,6 +3,7 @@ package com.example.cloudcomputingproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -61,9 +62,20 @@ public class ViewPostActivity extends AppCompatActivity {
 
         intent = getIntent();
         String other_user_id = intent.getStringExtra("user_id");
+        String new_title = "작성한 소식";
         if(other_user_id!=null){
             user_id = other_user_id; // 만약, 다른 사용자가 넘겨준 intent가 감지되었다면, 이 user_id로 접근할 것임.
+
+            toolbar.setTitle(new_title);
         }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         String flag = "mypost";
         startGet(new LikePostData(user_id, flag));
     }

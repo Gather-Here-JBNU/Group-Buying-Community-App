@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:title="내가 작성한 글"
+        app:title="내가 작성한 소식"
         app:titleTextAppearance="@style/ToolbarTitleText" />
 
     <View

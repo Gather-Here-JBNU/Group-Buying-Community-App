@@ -152,7 +152,7 @@
                 android:id="@+id/favorites_img"
                 android:layout_width="0dp"
                 android:layout_height="28dp"
-                android:layout_weight="0.9"
+                android:layout_weight="1"
                 android:src="@drawable/like_color" />
 
             <TextView
@@ -188,7 +188,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="10"
                 android:gravity="center_vertical"
-                android:text="내가 작성한 글"
+                android:text="내가 작성한 소식"
                 android:textColor="@color/black" />
         </TableRow>
 

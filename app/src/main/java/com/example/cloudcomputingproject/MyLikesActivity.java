@@ -3,6 +3,7 @@ package com.example.cloudcomputingproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -80,6 +81,14 @@ public class MyLikesActivity extends AppCompatActivity {
             user_id = other_user_id; // 만약, 다른 사용자가 넘겨준 intent가 감지되었다면, 이 user_id로 접근할 것임.
             Log.d("테스트공간","");
         }
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         String flag = "like";
         startGet(new LikePostData(user_id, flag));
