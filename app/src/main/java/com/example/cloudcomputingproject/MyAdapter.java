@@ -39,9 +39,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 Intent in = new Intent(context, MyPage2.class);
                 in.putExtra("user_id", mDataset.get(position).getUserId());
 
-                if(position != RecyclerView.NO_POSITION){
+                if (position != RecyclerView.NO_POSITION) {
                     String userEmail = mDataset.get(position).getEmail();
-                    in.putExtra("email",userEmail);
+                    in.putExtra("email", userEmail);
                     context.startActivity(in);
                 }
             });
