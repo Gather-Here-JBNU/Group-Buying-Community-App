@@ -19,8 +19,6 @@ import com.example.cloudcomputingproject.utility.RetrofitClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText email_et, pw_et, nickname_et;
     String email, pw, nickname, u_id;
-    private FirebaseFirestore mStore;
     private FirebaseAuth mAuth;
     private APIInterface service;
 
@@ -46,8 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
         login_move_layout = findViewById(R.id.login_move_layout);
         toolbar = findViewById(R.id.toolbar);
 
-         mStore = FirebaseFirestore.getInstance(); // 파이어베이스 스토어
-         mAuth = FirebaseAuth.getInstance(); // 파이어베이스 인스턴스 설정
+        // 파이어베이스 스토어
+        mAuth = FirebaseAuth.getInstance(); // 파이어베이스 인스턴스 설정
 
         service = RetrofitClient.getClient().create(APIInterface.class); // 서버 연결
         register_btn.setOnClickListener(new View.OnClickListener() {

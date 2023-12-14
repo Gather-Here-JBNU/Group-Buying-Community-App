@@ -34,7 +34,7 @@ public class ShowPostClickActivity extends AppCompatActivity {
 
     private boolean isFavorite = false;
     ImageView like_iv, img_iv;
-    String post_id, title, nickname, info, price, location, user_id, email,
+    String post_id, title, nickname, price, location, user_id, email,
             cur_nickname, img, contents;
 
     View imgLine_view;
@@ -76,21 +76,14 @@ public class ShowPostClickActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
 
         LikeDataControl(new LikeData(user_id, post_id, 0)); // flag 0번으로 select 기능 control
-        like_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onStarClick();
-            }
-        });
+        like_iv.setOnClickListener(v -> onStarClick());
 
-        EnterChat_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(ShowPostClickActivity.this, ChatActivity.class);
-                in.putExtra("email", email);
-                in.putExtra("title", title);
-                startActivity(in);
-            }
+        EnterChat_btn.setOnClickListener(v -> {
+            Intent in = new Intent(ShowPostClickActivity.this, ChatActivity.class);
+            in.putExtra("email", email);
+            in.putExtra("title", title);
+            in.putExtra("post_id", post_id);
+            startActivity(in);
         });
     }
 
@@ -165,7 +158,7 @@ public class ShowPostClickActivity extends AppCompatActivity {
                 Log.d("만세","만세");
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
 
                     title = result.getTitle();       // 제목 가져오기
                     nickname = result.getNickname(); // 닉네임 가져오기.
@@ -216,7 +209,7 @@ public class ShowPostClickActivity extends AppCompatActivity {
                 // 성공시, result에 정보를 불러올 것임. 여기서 result에 대한 정보는 UserDataGetRespons.java에 명시되어 있음.
 
                 if (result.getCode() == 200) {
-                    Log.e("유저 데이터 불러오기 성공..", String.valueOf("."));
+                    Log.e("유저 데이터 불러오기 성공..", ".");
 
                     email = result.getEmail();       // 이메일 가져오기
                     cur_nickname = result.getNickname(); // 현재 유저의 닉네임 가져오기.

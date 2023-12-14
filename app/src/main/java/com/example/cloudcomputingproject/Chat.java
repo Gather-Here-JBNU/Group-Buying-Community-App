@@ -59,4 +59,5 @@ public class Chat {
         return time;
     }
     public String getUserId() {return user_id;}
+    public void setUserId(String user_id){this.user_id =user_id;}
 }

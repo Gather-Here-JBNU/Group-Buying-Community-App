@@ -39,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     MyAdapter mAdapter;
     FirebaseDatabase database;
     APIInterface service;
-    String u_id, email, nickname, title, emailCheck, time; // u_id
+    String u_id, post_id, email, nickname, title, emailCheck, time; // u_id
 
     Toolbar toolbar;
     Intent intent;
@@ -60,6 +60,7 @@ public class ChatActivity extends AppCompatActivity {
         u_id = FirebaseAuth.getInstance().getUid();
         emailCheck = intent.getStringExtra("email"); // PostActivity에서, "채팅 확인용" 눌렀을 때 전달된 email 요소 가져오기.
         title = intent.getStringExtra("title");
+        post_id = intent.getStringExtra("post_id");
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -136,7 +137,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        DatabaseReference ref = database.getReference(title);
+        DatabaseReference ref = database.getReference(post_id);
         ref.addChildEventListener(childEventListener);
 
         // 메시지 전송을 위한 클릭 리스너
@@ -158,7 +159,7 @@ public class ChatActivity extends AppCompatActivity {
             Log.d(TAG,"email은 \"" + stEmail + "\" text는 \"" + stText + "\" time은 \"" + time + "\" 입니다.");
 
             // Firebase Realtime Database에 데이터 전송
-            DatabaseReference myRef = database.getReference(title).child(datetime);
+            DatabaseReference myRef = database.getReference(post_id).child(datetime);
             myRef.setValue(chat);
             etText.getText().clear();
         });
